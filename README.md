@@ -12,20 +12,11 @@ Below is a breakdown of the major datasets included, grouped by broad themes.  E
 
 ---
 
-#### Comparative Omics (RNA‐seq, Absolute Proteomics)  
-These datasets provide transcriptomic and/or proteomic data across multiple conditions, used in **`deg2tfbs`** to isolate differentially expressed genes and then indirectly in **`dnadesign`** for context‐dependent promoter design.
+### Comparative Omics (RNA‐seq, Absolute Proteomics)  
+Most of these datasets compare omics readouts between a single “target” and “reference” condition, enabling the identification of up- and down-regulated genes. Some studies provide full raw data (yay!), which lets us reproduce results, apply custom thresholds, and isolate differentially expressed genes ourselves (as is done in **`deg2tfbs`**). Other articles do not share raw data but instead list up- and down-regulated genes directly, in which case we simply import those gene sets into **`deg2tfbs`** to identify the associated transcription factors and their DNA-binding sites. These binding sites can then later be used in **`dnadesign`**.
 
-- **Durfee et al.**  
-  - **Title**: *Transcription profiling of the stringent response in Escherichia coli*  
-  - **DOI**: 10.1128/JB.01092-07  
-  - **Association**: Stringent response  
-  - **Comments**: Conducted a transcriptomic study by inducing ppGpp accumulation; curated a list of differentially expressed genes within 5 minutes of stringent response onset.
 
-- **Houser et al.**  
-  - **Title**: *Controlled Measurement and Comparative Analysis of Cellular Components in E. coli*  
-  - **DOI**: 10.1371/journal.pcbi.1004400  
-  - **Association**: Stringent response  
-  - **Comments**: Detailed time‐course characterization (two weeks) of *E. coli* growth and starvation.  Supplemental Table 4 highlights RNAs significantly changing through starvation.
+#### Diverse Media Conditions
 
 - **Mori et al.**  
   - **Title**: *From coarse to fine: the absolute Escherichia coli proteome under diverse growth conditions*  
@@ -33,17 +24,48 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
   - **Association**: Proteomic allocation  
   - **Comments**: Quantification of >2,000 proteins in *E. coli* across 60+ growth conditions (nutrient limitations, stress, etc.).  
  
-- **Peebo et al.**  
-  - **Title**: *Proteome reallocation in Escherichia coli with increasing specific growth rate*  
-  - **DOI**: 10.1039/C4MB00721B  
-  - **Association**: Proteomic allocation  
-  - **Comments**: Covariance analysis between protein‐expression costs and growth rate, identifying which proteins have highest “synthesis priority.”
-
 - **Schmidt et al.**  
   - **Title**: *The quantitative and condition-dependent Escherichia coli proteome*  
   - **DOI**: 10.1038/nbt.3418  
   - **Association**: Ratio of TF proteins in given environments  
   - **Comments**: Table S6 includes global absolute abundances, providing a resource for stoichiometric modeling of TF:DNA interactions.
+
+#### The Stringent Response
+
+- **Durfee et al.**  
+  - **Title**: *Transcription profiling of the stringent response in Escherichia coli*  
+  - **DOI**: 10.1128/JB.01092-07  
+  - **Association**: Stringent response  
+  - **Comments**: Conducted a transcriptomic study by inducing ppGpp accumulation; curated a list of differentially expressed genes within 5 minutes of stringent response onset.
+
+- **Franchini et al. (a), (b)**  
+  - **DOIs**: 10.1371/journal.pone.0133793 and 10.1099/mic.0.28939-0  
+  - **Association**: Stringent response under glucose limitation  
+  - **Comments**: Transcriptomic studies in *E. coli* ΔrpoS and Δcya mutants under glucose‐limited continuous culture (Franchini a).  Also a long‐term adaptation dataset (Franchini b).
+
+- **Gummesson et al.**  
+  - **Title**: *Valine‐Induced Isoleucine Starvation in E. coli Studied by Spike‐In Normalized RNA Sequencing*  
+  - **DOI**: 10.3389/fgene.2020.00144  
+  - **Association**: Stringent response  
+  - **Comments**: PC1/PC2 scores for all genes and a list of 506 genes ≥2.0 fold up after 80 min of isoleucine starvation, plus top 100 most strongly activated genes.
+
+- **Houser et al.**  
+  - **Title**: *Controlled Measurement and Comparative Analysis of Cellular Components in E. coli*  
+  - **DOI**: 10.1371/journal.pcbi.1004400  
+  - **Association**: Stringent response  
+  - **Comments**: Detailed time‐course characterization (two weeks) of *E. coli* growth and starvation.  Supplemental Table 4 highlights RNAs significantly changing through starvation.
+
+- **Lu et al.**  
+  - **Title**: *Genome-wide transcriptional responses of Escherichia coli to glyphosate, a potent inhibitor of the shikimate pathway enzyme 5-enolpyruvylshikimate-3-phosphate synthase*  
+  - **DOI**: [10.1039/C2MB25374G](https://doi.org/10.1039/C2MB25374G)  
+  - **Association**: Stringent response  
+  - **Comments**: Transcriptome analysis of *E. coli* exposed to 200 mM glyphosate revealed differential expression of 1,040 genes (~23% of the genome), highlighting wide-reaching metabolic stress.
+
+- **Sanchez‐Vazquez et al.**  
+  - **Title**: *Genome-wide effects on Escherichia coli transcription from ppGpp binding to its two sites on RNA polymerase*  
+  - **DOI**: 10.1073/pnas.1819682116  
+  - **Association**: Stringent response  
+  - **Comments**: RNA‐seq of *E. coli* with and without ppGpp‐binding sites on RNAP; extensive gene expression changes at 5–10 min.
 
 - **Wu et al.**  
   - **Title**: *Enzyme expression kinetics by Escherichia coli during transition from rich to minimal media depends on proteome reserves*  
@@ -57,22 +79,7 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
   - **Association**: Stringent response  
   - **Comments**: Proteomic profiling of >2500 proteins during nutrient downshift in wild‐type and *relA*‐deficient strains.
 
-- **Radzikowski et al.**  
-  - **Title**: *Bacterial persistence is an active σS stress response to metabolic flux limitation*  
-  - **DOI**: 10.15252/msb.20166998  
-  - **Association**: Stringent response  
-  - **Comments**: Developed and verified a model linking metabolic flux collapse to *E. coli* persistence under severe stress.
-
-- **Franchini et al. (a), (b)**  
-  - **DOIs**: 10.1371/journal.pone.0133793 and 10.1099/mic.0.28939-0  
-  - **Association**: Stringent response under glucose limitation  
-  - **Comments**: Transcriptomic studies in *E. coli* ΔrpoS and Δcya mutants under glucose‐limited continuous culture (Franchini a).  Also a long‐term adaptation dataset (Franchini b).
-
-- **Gummesson et al.**  
-  - **Title**: *Valine‐Induced Isoleucine Starvation in E. coli Studied by Spike‐In Normalized RNA Sequencing*  
-  - **DOI**: 10.3389/fgene.2020.00144  
-  - **Association**: Stringent response  
-  - **Comments**: PC1/PC2 scores for all genes and a list of 506 genes ≥2.0 fold up after 80 min of isoleucine starvation, plus top 100 most strongly activated genes.
+#### Metabolic Burden
 
 - **Ceroni et al.**  
   - **Title**: *Burden‐driven feedback control of gene expression*  
@@ -80,11 +87,21 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
   - **Association**: Metabolic burden  
   - **Comments**: RNA‐seq plus in vivo assays identify major transcriptional changes when strong synthetic constructs are over‐expressed.
 
+#### Membrane Stress and Fatty Acid Production
+
 - **Emani et al.**  
   - **Title**: *Periplasmic stress contributes to a trade-off between protein secretion and cell growth in Escherichia coli Nissle 1917*  
   - **DOI**: 10.1093/synbio/ysad013  
   - **Association**: Protein secretion  
   - **Comments**: RNA‐seq used to probe growth–secretion trade‐offs in *E. coli* Nissle 1917 secreting sfGFP via the curli system.
+
+- **Vazulka et al.**  
+  - **Title**: *RNA-seq reveals multifaceted gene expression response to Fab production in Escherichia coli fed-batch processes with particular focus on ribosome stalling*  
+  - **DOI**: [10.1186/s12934-023-02278-w](https://doi.org/10.1186/s12934-023-02278-w)  
+  - **Association**: Fab production  
+  - **Comments**: Characterized the gene expression response in *E. coli* BL21(DE3) and HMS174(DE3) to periplasmic Fab expression via fed-batch RNA‐seq.
+
+#### Antibiotic Stress
 
 - **Bie et al.**  
   - **Title**: *Comparative Analysis of Transcriptomic Response of E. coli… to Nine Representative Classes of Antibiotics*  
@@ -92,11 +109,33 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
   - **Association**: Antibiotic response  
   - **Comments**: A comprehensive RNA‐seq survey of how *E. coli* K‐12 MG1655 responds to multiple antibiotics, including ampicillin‐like β‐lactams.
 
-- **Sanchez‐Vazquez et al.**  
-  - **Title**: *Genome-wide effects on Escherichia coli transcription from ppGpp binding to its two sites on RNA polymerase*  
-  - **DOI**: 10.1073/pnas.1819682116  
+- **Radzikowski et al.**  
+  - **Title**: *Bacterial persistence is an active σS stress response to metabolic flux limitation*  
+  - **DOI**: 10.15252/msb.20166998  
   - **Association**: Stringent response  
-  - **Comments**: RNA‐seq of *E. coli* with and without ppGpp‐binding sites on RNAP; extensive gene expression changes at 5–10 min.
+  - **Comments**: Developed and verified a model linking metabolic flux collapse to *E. coli* persistence under severe stress.
+
+#### Heat Shock Response
+
+- **Kim et al.**  
+  - **Title**: *Heat-responsive and time-resolved transcriptome and metabolome analyses of Escherichia coli uncover thermo-tolerant mechanisms*  
+  - **DOI**: [10.1038/s41598-020-74606-8](https://doi.org/10.1038/s41598-020-74606-8)  
+  - **Association**: Heat shock response  
+  - **Comments**: Applied RNA‐seq to capture early, middle, and late stages of heat stress (2 min–40 h), illuminating initiation, adaptation, and phenotypic plasticity phases in *E. coli*.
+
+- **Zhang et al.**  
+  - **Title**: *Heat-Shock Response Transcriptional Program Enables High-Yield and High-Quality Recombinant Protein Production in Escherichia coli*  
+  - **DOI**: [10.1021/cb5004477](https://doi.org/10.1021/cb5004477)  
+  - **Association**: Heat shock response  
+  - **Comments**: Demonstrated that a σ^32‐I54N HSR-like reprogrammed proteostasis network can boost soluble, folded, and functional recombinant proteins
+
+#### Phage Shock Response
+
+- **Jovanovic et al.**  
+  - **Title**: *Induction and Function of the Phage Shock Protein Extracytoplasmic Stress Response in Escherichia coli*  
+  - **DOI**: [10.1074/jbc.M602323200](https://doi.org/10.1074/jbc.M602323200)  
+  - **Association**: Phage shock response  
+  - **Comments**: Expressed Protein IV secretin to induce a Psp response; reported differentially expressed genes (DEGs) from transcriptomic analysis.
 
 ---
 
@@ -109,7 +148,7 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
 
 ---
 
-#### 8. Genome Streamlining & Reduced‐Genome Strains  
+#### Genome Streamlining & Reduced‐Genome Strains  
 - **Baumgart et al.**  
   - **Title**: *Corynebacterium glutamicum Chassis C1 Building and Testing a Novel Platform Host for Synthetic Biology and Industrial Biotechnology*  
   - **DOI**: 10.1021/acssynbio.7b00261  
@@ -130,7 +169,7 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
 
 ---
 
-#### Additional Sources
+#### Other Curated Literature
 
 - **Baba et al.**  
   - **Title**: *Construction of Escherichia coli K‐12 in‐frame, single‐gene knockout mutants: The Keio collection*  
@@ -144,6 +183,12 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
   - **Association**: Carbon uptake / diauxic growth  
   - **Comments**: RNA‐seq on *E. coli* with attenuated growth and substrate‐uptake rates; identifies negative correlations (genes up while uptake down).
 
+- **Freddolino et al.**  
+  - **Title**: *Dynamic landscape of protein occupancy across the Escherichia coli chromosome*  
+  - **DOI**: 10.1371/journal.pbio.3001306  
+  - **Association**: Protein occupancy on chromosome  
+  - **Comments**: Parallel monitoring of DNA‐binding protein occupancy states under various genetic and environmental perturbations.
+
 - **Gao et al.**  
   - **Title**: *A balancing act in transcription regulation by response regulators titration of transcription factor activity by decoy DNA binding sites*  
   - **DOI**: 10.1093/nar/gkab935  
@@ -155,6 +200,12 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
   - **DOI**: 10.1002/bit.27371  
   - **Association**: Universal stress proteins  
   - **Comments**: Discusses the accumulation of universal stress proteins in *E. coli* when encountering any growth arrest.
+
+- **Lastiri‐Pancardo et al.**  
+  - **Title**: *A quantitative method for proteome reallocation using minimal regulatory interventions*  
+  - **DOI**: 10.1038/s41589-020-0593-y  
+  - **Association**: Proteome allocation  
+  - **Comments**: Designed ReProMin to remove TFs in *E. coli* that maximizes release of resources for cell growth or synthetic usage.
 
 - **Loffler et al.**  
   - **Title**: *Engineering E. coli for large-scale production - Strategies considering ATP expenses and transcriptional responses*  
@@ -168,6 +219,24 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
   - **Association**: CsrA‐regulated genes  
   - **Comments**: Generated hundreds of predicted CsrA binding sites from shotgun proteomics.
 
+- **Peebo et al.**  
+  - **Title**: *Proteome reallocation in Escherichia coli with increasing specific growth rate*  
+  - **DOI**: 10.1039/C4MB00721B  
+  - **Association**: Proteomic allocation  
+  - **Comments**: Covariance analysis between protein‐expression costs and growth rate, identifying which proteins have highest “synthesis priority.”
+
+- **Rajacharya et al.**  
+  - **Title**: *Proteomics and metabolic burden analysis to understand the impact of recombinant protein production in E. coli*  
+  - **DOI**: 10.1038/s41598-024-63148-y  
+  - **Association**: Metabolic burden  
+  - **Comments**: Investigated parent vs. recombinant strains (induced at various time points) via proteomics to track expression burden.
+
+- **Schink et al.**  
+  - **Title**: *Analysis of proteome adaptation reveals a key role of the bacterial envelope…*  
+  - **DOI**: 10.15252/msb.202211160  
+  - **Association**: Maintenance rate & bacterial envelope  
+  - **Comments**: Trade‐offs between growth and survival to identify proteins correlated with *E. coli* death rates.
+
 - **Thomason et al.**  
   - **Title**: *Global Transcriptional Start Site Mapping Using Differential RNA Sequencing Reveals Novel Antisense RNAs in Escherichia coli*  
   - **DOI**: 10.1128/JB.02096-14  
@@ -180,39 +249,15 @@ These datasets provide transcriptomic and/or proteomic data across multiple cond
   - **Association**: Stringent response  
   - **Comments**: Identified gene sets requiring ppGpp, Lrp, and RpoS for induction across the “feast to famine” gradient.
 
-- **Freddolino et al.**  
-  - **Title**: *Dynamic landscape of protein occupancy across the Escherichia coli chromosome*  
-  - **DOI**: 10.1371/journal.pbio.3001306  
-  - **Association**: Protein occupancy on chromosome  
-  - **Comments**: Parallel monitoring of DNA‐binding protein occupancy states under various genetic and environmental perturbations.
-
-- **Schink et al.**  
-  - **Title**: *Analysis of proteome adaptation reveals a key role of the bacterial envelope…*  
-  - **DOI**: 10.15252/msb.202211160  
-  - **Association**: Maintenance rate & bacterial envelope  
-  - **Comments**: Trade‐offs between growth and survival to identify proteins correlated with *E. coli* death rates.
-
 - **Youssef et al.**  
   - **Title**: *Dynamic remodeling of Escherichia coli interactome…*  
   - **DOI**: 10.1002/pmic.202200404  
   - **Association**: Protein complex interaction remodeling  
   - **Comments**: Used co‐fractionation mass spectrometry across ten conditions to quantify ~2000 protein–protein interactions.
 
-- **Lastiri‐Pancardo et al.**  
-  - **Title**: *A quantitative method for proteome reallocation using minimal regulatory interventions*  
-  - **DOI**: 10.1038/s41589-020-0593-y  
-  - **Association**: Proteome allocation  
-  - **Comments**: Designed ReProMin to remove TFs in *E. coli* that maximizes release of resources for cell growth or synthetic usage.
-
-- **Rajacharya et al.**  
-  - **Title**: *Proteomics and metabolic burden analysis to understand the impact of recombinant protein production in E. coli*  
-  - **DOI**: 10.1038/s41598-024-63148-y  
-  - **Association**: Metabolic burden  
-  - **Comments**: Investigated parent vs. recombinant strains (induced at various time points) via proteomics to track expression burden.
-
 ---
 
-#### Promoter/Regulatory Element Datasets
+### Promoter/Regulatory Element Datasets
 
 - **EcoCyc data**  
   *In this repository, EcoCyc‐derived gene annotations, regulatory interactions, and functional groupings are stored for integration with `deg2tfbs` and `dnadesign`.*
