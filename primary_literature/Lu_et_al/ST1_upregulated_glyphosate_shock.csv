@@ -1,0 +1,453 @@
+Gene name,Gene ID ,Functional description ,Fold change
+adiA ,b4117 ,biodegradative arginine decarboxylase ,2.45
+afuC ,b0262 ,putative ATP-binding component of a transport system ,2.02
+ansB ,b2957 ,periplasmic L-asparaginase II ,2.28
+argK ,b2918 ,membrane ATPase/protein kinase ,2.12
+cadA ,b4131 ,lysine decarboxylase 1 ,2.6
+cadB ,b4132 ,transport of lysine cadaverine ,2.83
+ddpF ,b1483 ,"D,D-dipeptide permease system, ATP-binding component ",2.83
+ddpX ,b1488 ,"D-ala-D-ala dipeptidase, Zn-dependent ",2.49
+edd ,b1851 ,6-phosphogluconate dehydratase ,2.29
+elaD ,b2269 ,putative sulfatase,2.07
+idnD ,b4267 ,L-idonate dehydrogenase ,2.31
+nikA ,b3476 ,periplasmic binding protein for nickel ,2.15
+nikB ,b3477 ,"transport of nickel, membrane protein ",2.17
+nikD ,b3479 ,ATP-binding protein of nickel transport system ,2.24
+oxc ,b2373 ,"oxalyl CoA decarboxylase, ThDP-dependent ",2.25
+pheP ,b0576 ,phenylalanine-specific transport system and proline ,2.08
+proV ,b2677 ,"ATP-binding component of transport system for glycine, betaine and proline ",12.96
+proW ,b2678 ,high-affinity transport system for glycine betaine and proline ,17.69
+proX ,b2679 ,high-affinity transport system for glycine betaine and proline ,11.66
+rspB ,b1580 ,starvation sensing protein ,2.47
+speF ,b0693 ,"ornithine decarboxylase isozyme, inducible ",3.04
+tdcA ,b3118 ,transcriptional activator of tdc operon ,2.56
+tdcB ,b3117 ,"threonine dehydratase, catabolic ",2.89
+tdcC ,b3116 ,"anaerobically inducible L-threonine, L-serine permease ",2.29
+tdcF ,b3113 ,predicted L-PSP (mRNA) endoribonuclease ,2.18
+tdcR ,b3119 ,threonine dehydratase operon activator protein ,2.46
+tnaA ,b3708 ,tryptophanase ,3.91
+tnaB ,b3709 ,low affinity tryptophan permease ,2.76
+tnaC ,b3707 ,tryptophanase leader peptide ,3.96
+wcaB ,b2058 ,predicted acyl transferase ,2.06
+wcaD ,b2056 ,putative colanic acid polymerase ,2.56
+wcaF ,b2054 ,putative transferase ,2.7
+wzc ,b2060 ,protein-tyrosine kinase ,2.68
+yagE ,b0268 ,putative lyasesynthase ,2.04
+yahN ,b0328 ,"inner membrane protein, LysE transporter family;overproduction confers",2.38
+ydeN ,b1498 ,putative sulfatase ,2.46
+ydjJ ,b1774 ,putative oxidoreductase ,2.1
+yedS_3 ,b1966 ,putative amino acidamine transport protein ,2.09
+yfbL ,b2271 ,putative aminopeptidase ,2.46
+yfcC ,b2298 ,putative S-transferase ,2.35
+yfiK ,b2578 ,cysteine and O-acetylserine exporter ,2.38
+ygeW ,b2870 ,putative carbamoyl transferase ,2.3
+ygeX ,b2871 ,"2,3-diaminopropionate ammonia-lyase ",2.12
+ygeY ,b2872 ,putative deacetylase ,2.22
+ygfT ,b2887 ,"putative oxidoreductase, Fe-S subunit ",2.06
+yhdX ,b3269 ,putative transport system permease protein ,2.14
+yhdY ,b3270 ,putative transport system permease protein ,2.16
+yhfX ,b3381 ,predicted amino acid racemase ,2.01
+yhiP ,b3496 ,dipeptide and tripeptide permease B ,2.3
+yjdL ,b4130 ,putative peptide transporter ,2.26
+yjiM ,b4335 ,predicted 2-hydroxyglutaryl-CoA dehydratase ,2
+yqeA ,b2874 ,putative kinase ,2.22
+agaB ,b3138 ,"PTS system, cytoplasmic, N-acetylgalactosamine-specific IIB component 1",2.15
+agaI ,b3141 ,galactosamine-6-phosphate isomerase ,2.47
+agaV ,b3133 ,"PTS system, cytoplasmic, N-acetylgalactosamine-specific IIB component 2",2.44
+agaW ,b3134 ,PTS system N-acetylgalactosameine-specific IIC component 2 ,2.67
+agaY ,b3137 ,tagatose-bisphosphate aldolase 2 ,2.67
+agaZ ,b3132 ,"tagatose 6-phosphate aldolase 1, kbaZ subunit ",2.31
+alsA ,b4087 ,fused D-allose transporter subunits of ABC superfamily: ATP-binding,2.03
+alsC ,b4086 ,D-allose transporter subunit ,2.13
+alsE ,b4085 ,allulose-6-phosphate 3-epimerase ,2.06
+araA ,b0062 ,L-arabinose isomerase ,2.08
+araF ,b1901 ,L-arabinose-binding periplasmic protein ,2.33
+arnF ,b2258 ,undecaprenyl phosphate-alpha-L-ara4N exporter; flippase ArnEF subunit ,2
+bglB ,b3721 ,phospho-beta-glucosidase B; cryptic ,2.05
+bglF ,b3722 ,"PTS system beta-glucosides, enzyme II, cryptic ",2.1
+citE ,b0616 ,citrate lyase beta chain acyl lyase subunit ,2.15
+cmtA ,b2933 ,"PTS system, mannitol-specific enzyme II component, cryptic ",2.24
+cmtB ,b2934 ,"PTS system, mannitol-specific enzyme II component, cryptic ",2.17
+dgoT ,b3691 ,D-galactonate transport ,2.09
+ebgA ,b3076 ,"evolved beta-D-galactosidase, alpha subunit; cryptic gene ",2.26
+ebgC ,b3077 ,"evolved beta-D-galactosidase, beta subunit; cryptic gene ",2.27
+emrB ,b2686 ,multidrug resistance; probably membrane translocase ,2.03
+frvA ,b3900 ,"PTS system, fructose-specific IIA component ",2.26
+frvB ,b3899 ,"PTS system, fructose-like enzyme IIBC component ",2.1
+frvX ,b3898 ,frv operon protein ,2.11
+frwB ,b3950 ,PTS system fructose-like IIB component 1 ,2.84
+frwC ,b3949 ,"PTS system, fructose-like enzyme II component ",2.8
+fryB ,b2387 ,predicted enzyme IIB component of PTS ,2.24
+fryC ,b2386 ,predicted enzyme IIC component of PTS ,2.4
+fucA ,b2800 ,L-fuculose-1-phosphate aldolase ,2.02
+fucI ,b2802 ,L-fucose isomerase ,2.43
+fucK ,b2803 ,L-fuculokinase ,2.29
+fucP ,b2801 ,fucose permease ,2.29
+garL ,b3126 ,alpha-dehydro-beta-deoxy-D-glucarate aldolase ,2.02
+glvB ,b3682 ,"PTS system, arbutin-like IIB component ",2
+glvC ,b3683 ,"PTS system, arbutin-like IIC component ",2.16
+glvG ,b3681 ,probable 6-phospho-beta-glucosidase ,2.25
+gntP ,b4321 ,gluconate transport system permease 3 ,2.43
+gntU ,b3436 ,a gluconate transporter ,2
+gudP ,b2789 ,putative D-glucarate permease (MFS family) ,2.52
+hcaT ,b2536 ,MFS (major facilitator superfamily) transporter ,2.18
+hrsA ,b0731 ,"protein modification enzyme, induction of ompC ",2.05
+hycA ,b2725 ,transcriptional repression of hyc and hyp operons ,2
+hyi ,b0508 ,hydroxypyruvate isomerase ,2.07
+idnT ,b4265 ,L-idonate transporter ,2.28
+kdgT ,b3909 ,2-keto-3-deoxy-D-gluconate transport system ,2.01
+lamB ,b4036 ,phage lambda receptor protein; maltose high-affinity receptor ,2.01
+malF ,b4033 ,"part of maltose permease, periplasmic ",2.19
+malG ,b4032 ,"part of maltose permease, inner membrane ",2.27
+malK ,b4035 ,ATP-binding component of transport system for maltose ,2.38
+malM ,b4037 ,periplasmic protein of maltose regulon ,2
+maoC ,b1387 ,putative aldehyde dehydrogenase ,2.4
+melR ,b4118 ,regulator of melibiose operon ,2.22
+molR_2 ,b2116 ,"molybdate metabolism regulator, second fragment 2 ",2.18
+nanT ,b3224 ,sialic acid transporter ,2.55
+otsA ,b1896 ,trehalose-6-phosphate synthase ,4.33
+otsB ,b1897 ,"trehalose-6-phosphate phophatase, biosynthetic ",3.78
+ptsA ,b3947 ,PEP-protein phosphotransferase system enzyme I ,2.17
+ptxA ,b4195 ,L-ascorbate-specific enzyme IIA component of PTS ,2.03
+rhaA ,b3903 ,L-rhamnose isomerase ,2.62
+rhaB ,b3904 ,rhamnulokinase ,2.4
+rhaD ,b3902 ,rhamnulose-phosphate aldolase ,2.06
+rhaR ,b3906 ,positive regulator for rhaRS operon ,2.55
+rhaS ,b3905 ,positive regulator for rhaBAD operon ,2.05
+setB ,b2170 ,lactose/glucose efflux system ,2.12
+sgaU ,b4197 ,L-xylulose 5-phosphate 3-epimerase ,2.22
+sgbE ,b3583 ,L-ribulose-5-phosphate 4-epimerase ,2.2
+sgbH ,b3581 ,3-keto-L-gulonate 6-phosphate decarboxylase ,2.03
+sgbU ,b3582 ,predicted L-xylulose 5-phosphate 3-epimerase ,2.18
+sgcX ,b4305 ,KpLE2 phage-like element; predicted endoglucanase with Zn-dependent,2.11
+srlA ,b2702 ,"PTS system, glucitolsorbitol-specific IIC component, one of two ",2.05
+treB ,b4240 ,"PTS system enzyme II, trehalose specific ",2.18
+treC ,b4239 ,trehalase 6-P hydrolase ,2.12
+uhpT ,b3666 ,hexose phosphate transport protein ,2.13
+uxaB ,b1521 ,altronate oxidoreductase ,2.06
+uxuB ,b4323 ,D-mannonate oxidoreductase ,2.08
+xylF ,b3566 ,xylose binding protein transport system ,2.47
+ycjN ,b1310 ,predicted sugar transporter subunit: periplasmic-binding component of ABC,2.71
+ycjU ,b1317 ,beta-phosphoglucomutase ,2.16
+ycjV ,b1318 ,putative ATP-binding sugar transporter ,2.1
+ydeZ ,b1515 ,autoinducer 2 import system permease protein ,2.03
+yeeR ,b2001 ,putative PTS enzyme II ,2.44
+yeiC ,b2166 ,pseudouridine kinase ,2.25
+yfeN ,b2408 ,putative sugar hydrolase ,2.15
+ygbL ,b2738 ,predicted class II aldolase ,2.3
+ygcE ,b2776 ,putative kinase ,2.57
+yggF ,b2930 ,glyoxylate-induced protein ,2.07
+ygiZ ,b3027 ,"molybdate metabolism regulator, first fragment ",2.25
+ygjE ,b3063 ,L-tartrate/succinate antiporte ,2.24
+ygjK ,b3080 ,alpha-glucosidase ,2.16
+yhbX ,b3173 ,putative alkaline phosphatase I ,2.13
+yhfW ,b3380 ,putative mutase ,2.01
+yiaL ,b3576 ,putative lipase ,2.55
+yiaM ,b3577 ,L-dehydroascorbate transporter ,2.24
+yiaN ,b3578 ,L-dehydroascorbate transporter ,2.43
+yiaO ,b3579 ,L-dehydroascorbate transporter ,2.37
+yieC ,b3720 ,"carbohydrate-specific outer membrane porin, cryptic ",2.13
+yihO ,b3876 ,putative permease ,2.35
+yihP ,b3877 ,putative permease ,2.62
+yihS ,b3880 ,aldose-ketose isomerase; D-mannose isomerase ,2.33
+yjfR ,b4192 ,L-ascorbate 6-phosphate lactonase ,2.08
+yjhF ,b4296 ,putative transport system permease ,2.06
+yjhP ,b4306 ,putative methyltransferase ,2.66
+yjjN ,b4358 ,L-galactonate oxidoreductase,2.74
+yliI ,b0837 ,soluble aldose sugar dehydrogenase ,2.05
+dicB ,b1575 ,inhibition of cell division ,2.2
+dicC ,b1569 ,regulator of dicB ,2.14
+fliH ,b1940 ,flagellar assembly protein,2.33
+csgC ,b1043 ,curli assembly protein ,2.24
+ecpD ,b0140 ,probable pilin chaperone similar to PapD ,2.44
+fhiA ,b0229 ,flagellar biosynthesis ,2.05
+fimG ,b4319 ,fimbrial morphology ,2.06
+flgC ,b1074 ,"flagellar biosynthesis, cell-proximal portion of basal-body rod ",2.83
+flgD ,b1075 ,"flagellar biosynthesis, initiation of hook assembly ",2.08
+flgE ,b1076 ,"flagellar biosynthesis, hook protein ",2.27
+flgG ,b1078 ,"flagellar biosynthesis, cell-distal portion of basal-body rod ",2.23
+flgH ,b1079 ,"flagellar biosynthesis, basal-body outer-membrane L (lipopolysaccharide",2.42
+flgI ,b1080 ,homolog of Salmonella P-ring of flagella basal body ,2.2
+flgK ,b1082 ,"flagellar biosynthesis, hook-filament junction protein 1 ",2.32
+flhE ,b1878 ,flagellar protein ,2.3
+fliI ,b1941 ,flagellum-specific ATP synthase ,2.07
+fliJ ,b1942 ,flagellar fliJ protein ,2.32
+fliK ,b1943 ,flagellar hook-length control protein ,2.17
+fliL ,b1944 ,flagellar biosynthesis ,2.15
+fliP ,b1948 ,flagellar biosynthesis ,2.24
+fliQ ,b1949 ,flagellar biosynthesis ,2.58
+fliR ,b1950 ,flagellar biosynthesis ,2.55
+fliS ,b1925 ,flagellar biosynthesis; repressor of class 3a and 3b operons (RflA activity) ,2.05
+gspD ,b3325 ,"general secretory pathway component, cryptic ",2.33
+gspE ,b3326 ,"general secretory pathway component, cryptic ",2.34
+gspF ,b3327 ,"general secretory pathway component, cryptic ",2.02
+gspG ,b3328 ,"pseudopilin, cryptic, general secretion pathway ",2.27
+gspH ,b3329 ,"general secretory pathway component, cryptic ",3.11
+gspI ,b3330 ,"general secretory pathway component, cryptic ",2.57
+htrE ,b0139 ,probable outer membrane porin protein involved in fimbrial assembly ,2.45
+motA ,b1890 ,proton conductor component of motor; no effect on switching ,2.39
+motB ,b1889 ,"enables flagellar motor rotation, linking torque machinery to cell wall ",2.19
+murP ,b2429 ,flagellar biosynthesis; repressor of class 3a and 3b operons (RflA activity) ,2.44
+sfmA ,b0530 ,putative fimbrial-like protein ,2.48
+sfmC ,b0531 ,"pilin chaperone, periplasmic ",2.54
+sfmF ,b0534 ,putative fimbrial-like protein ,2.79
+sfmH ,b0533 ,involved in fimbrial asembly ,3.34
+tap ,b1885 ,"methyl-accepting chemotaxis protein IV, peptide sensor receptor ",2.15
+yadN ,b0141 ,putative fimbrial-like protein ,2.23
+yagZ ,b0293 ,cryptic Mat fimbrillin gene ,2.04
+ybcW ,b0559 ,putative fimbrial-like protein ,2.26
+ybgP ,b0717 ,putative chaperone ,2.89
+ybgQ ,b0718 ,putative outer membrane protein ,2.57
+ycbF ,b0944 ,putative chaperone ,2.17
+ycbR ,b0939 ,putative chaperone ,2.21
+ycbS ,b0940 ,putative outer membrane protein ,2.08
+ydeQ ,b1502 ,putative adhesin; similar to FimH protein ,3.05
+ydeS ,b1504 ,putative fimbrial-like protein ,2.82
+yehB ,b2109 ,putative outer membrane protein ,2.49
+yehC ,b2110 ,putative chaperone ,2.07
+yfcR ,b2335 ,putative fimbrial protein ,2.23
+yfcV ,b2339 ,putative fimbrial-like protein ,2.6
+yggR ,b2950 ,putative protein transport ,2.22
+ygiL ,b3043 ,putative fimbrial-like protein ,2.45
+yodD ,b1953 ,putative curli production protein ,2.24
+yraK ,b3145 ,putative fimbrial protein ,2.1
+acrE ,b3265 ,transmembrane protein affects septum formation and cell membrane,2.43
+agaS ,b3136 ,tagatose-6-phosphate ketose/aldose isomerase ,2.23
+arnT ,b2257 ,4-amino-4-deoxy-L-arabinose transferase (lipid A modification) ,2.07
+betT ,b0314 ,high-affinity choline transport ,3.77
+caiT ,b0040 ,probable carnitine transporter ,2.55
+cpsB ,b2049 ,mannose-1-phosphate guanyltransferase ,2.01
+cusC ,b0572 ,"copper/silver efflux system, outer membrane component ",2.01
+fepE ,b0587 ,ferric enterobactin (enterochelin) transport ,2.11
+gudX ,b2788 ,(D)-glucarate dehydratase 1 ,2.09
+ompN ,b1377 ,"outer membrane pore protein N, non-specific ",2.32
+rspA ,b1581 ,starvation sensing protein ,2.63
+wcaA ,b2059 ,predicted glycosyl transferase ,2.36
+wcaC ,b2057 ,predicted glycosyl transferase ,2.76
+wcaE ,b2055 ,putative colanic acid biosynthesis glycosyl transferase ,2.4
+wcaG ,b2052 ,putative nucleotide di-P-sugar epimerase or dehydratase ,2.3
+wcaI ,b2050 ,putative colanic biosynthesis glycosyl transferase ,2.21
+wcaJ ,b2047 ,putative colanic acid biosynthsis UDP-glucose lipid carrier transferase ,2.05
+wza ,b2062 ,putative polysaccharide export protein ,2.43
+yaiU ,b0374 ,putative flagellin structural protein ,2.18
+yeaV ,b1801 ,putative transport protein ,2.66
+yfhD ,b2558 ,putative periplasmic binding transport protein ,2.1
+yhiU ,b3513 ,putative membrane protein ,2.3
+yiaD ,b3552 ,putative outer membrane protein ,2.46
+yjcP ,b4080 ,outer membrane factor of efflux pump ,2.19
+yohG ,b2138 ,putative channelfilament proteins ,2.2
+bioA ,b0774 ,"7,8-diaminopelargonic acid synthetase ",2.01
+bioD ,b0778 ,dethiobiotin synthetase ,2.11
+bioF ,b0776 ,8-amino-7-oxononanoate synthase ,2.04
+citD ,b0617 ,citrate lyase acyl carrier protein (gamma chain) ,2.37
+citF ,b0615 ,"citrate lyase, citrate-ACP transferase (alpha) subunit ",2.1
+citG ,b0613 ,2-(5''-triphosphoribosyl)-3'-dephosphocoenzyme-A synthase ,2.91
+citT ,b0612 ,citrate:succinate antiporter ,2.48
+citX ,b0614 ,apo-citrate lyase phosphoribosyl-dephospho-CoA transferase ,2.68
+thiG ,b3991 ,thiamin (thiazole moiety) biosynthesis protein ,2.05
+thiM ,b2104 ,hydoxyethylthiazole kinase ,2.2
+ampC ,b4150 ,beta-lactamase; penicillin resistance ,2.09
+dinF ,b4044 ,DNA-damage-inducible protein F ,2.19
+emrK ,b2368 ,multidrug resistance protein K ,2.6
+emrY ,b2367 ,multidrug resistance protein Y ,2.57
+mdtC ,b2076 ,"multidrug efflux system, subunit C ",2.03
+mdtF ,b3514 ,"multidrug transporter, RpoS-dependent ",2.65
+mdtJ ,b1600 ,multidrug efflux system transporter ,2.34
+mdtL ,b1599 ,multidrug efflux system transporter ,2.41
+ybeR ,b0645 ,putative lambdoid prophage Rac excisionase ,2.37
+ycfZ ,b1121 ,homolog of virulence factor ,2.12
+yiaV ,b3586 ,"membrane fusion protein (MFP) component of efflux pump, signal anchor ",2.21
+yibH ,b3597 ,putative membrane protein ,2.06
+yjcP ,b4080 ,outer membrane factor of efflux pump ,2.19
+yjcR ,b4082 ,membrane fusion protein of efflux pump ,2.19
+aldB ,b3588 ,aldehyde dehydrogenase B (lactaldehyde dehydrogenase) ,2.16
+allA ,b0505 ,ureidoglycolate hydrolase ,2.23
+allB ,b0512 ,allantoinase ,2.33
+allC ,b0516 ,allantoate amidohydrolase ,2.47
+allD ,b0517 ,ureidoglycolate dehydrogenase ,2.6
+allS ,b0504 ,DNA-binding transcriptional activator of the allD operon ,2.56
+araB ,b0063 ,L-ribulokinase ,2.12
+aslB ,b3800 ,putative arylsulfatase regulator ,2.15
+betB ,b0312 ,NAD+-dependent betaine aldehyde dehydrogenase ,2.74
+dcuD ,b3227 ,putative transport protein ,2.28
+fadH ,b3081 ,"2,4-dienoyl-CoA reductase, NADH and FMN-linked ",2.17
+fadJ ,b2341 ,fused enoyl-CoA hydratase and epimerase and isomerase/3-hydroxyacyl-CoA,2.31
+fadL ,b2342 ,"beta-ketoacyl-CoA thiolase, anaerobic, subunit ",2.39
+fdrA ,b0518 ,involved in protein transport; multicopy suppressor of dominant negative,2.47
+fixA ,b0041 ,"predicted electron transfer flavoprotein subunit, required for anaerobic",3.17
+fixC ,b0043 ,predicted oxidoreductase with FAD/NAD(P)-binding domain ,2.66
+fixX ,b0044 ,predicted 4Fe-4S ferredoxin-type protein ,2.57
+frc ,b2374 ,"formyl-CoA transferase, NAD(P)-binding ",2.47
+frmA ,b0356 ,"alcohol dehydrogenase class III; formaldehyde dehydrogenase,",5.45
+frmB ,b0355 ,S-formylglutathione hydrolase ,12.95
+frmR ,b0357 ,repressor of frmRAB ,4.75
+fucO ,b2799 ,"L-1,2-propanediol oxidoreductase ",2.02
+hcp ,b0873 ,hybrid-cluster ,2.4
+hycC ,b2723 ,membrane-spanning protein of hydrogenase 3 (part of FHL complex) ,2.08
+hycD ,b2722 ,membrane-spanning protein of hydrogenase 3 (part of FHL complex) ,2.25
+hydN ,b2713 ,"involved in electron transport from formate to hydrogen, Fe-S centers ",2.03
+hyfA ,b2481 ,hydrogenase 4 Fe-S subunit ,2.71
+hyfB ,b2482 ,hydrogenase 4 membrane subunit ,2.76
+hyfC ,b2483 ,hydrogenase 4 membrane subunit ,2.45
+hyfD ,b2484 ,hydrogenase 4 membrane subunit ,2.23
+hyfE ,b2485 ,hydrogenase 4 membrane subunit ,2.07
+hyfG ,b2487 ,hydrogenase 4 subunit ,2.62
+napG ,b2205 ,ferredoxin-type protein: electron transfer ,2.01
+narG ,b1224 ,"nitrate reductase 1, alpha subunit ",3.47
+narH ,b1225 ,"nitrate reductase 1, beta subunit ",2.22
+narJ ,b1226 ,"nitrate reductase 1, delta subunit, assembly function ",2.25
+ndh ,b1109 ,respiratory NADH dehydrogenase ,2.34
+norV ,b2710 ,citrate lyase alpha chain ,2.1
+nrfC ,b4072 ,formate-dependent nitrite reductase; Fe-S centers ,2.6
+paaA ,b1388 ,"ring 1,2-phenylacetyl-CoA epoxidase subunit ",2.57
+paaB ,b1389 ,"ring 1,2-phenylacetyl-CoA epoxidase possible subunit, not required for in",2.54
+paaC ,b1390 ,"ring 1,2-phenylacetyl-CoA epoxidase subunit ",2.75
+paaD ,b1391 ,"ring 1,2-phenylacetyl-CoA epoxidase subunit ",2.57
+paaE ,b1392 ,"ring 1,2-phenylacetyl-CoA epoxidase, NAD(P)H oxidoreductase component ",2.04
+rutA ,b1012 ,"pyrimidine oxygenase, FMN-dependent ",2.47
+rutB ,b1011 ,ureidoacrylate amidohydrolase,2.53
+rutC ,b1010 ,putative aminoacrylate peracid reductase ,2.04
+rutD ,b1009 ,putative aminoacrylate hydrolase ,2.32
+rutF ,b1007 ,flavin:NADH reductase ,2.02
+torC ,b0996 ,"trimethylamine N-oxide reductase, cytochrome c-type subunit ",2.06
+torD ,b0998 ,part of trimethylamine-N-oxide oxidoreductase ,2.54
+torR ,b0995 ,DNA-binding response regulator in two-component regulatory system with,2.1
+torS ,b0993 ,hybrid sensory histidine kinase in two-component regulatory system with,2.24
+ttdA ,b3061 ,"L-tartrate dehydratase, subunit A ",2.07
+ttdB ,b3062 ,"L-tartrate dehydratase, subunit B ",2.14
+xdhA ,b2866 ,"xanthine dehydrogenase, molybdenum binding subunit ",2.28
+yagS ,b0285 ,"PaoABC aldehyde oxidoreductase, FAD-containing subunit ",2.13
+yahF ,b0320 ,putative oxidoreductase subunit ,2.02
+yccM ,b0992 ,predicted 4Fe-4S membrane protein ,2.28
+ycgH_1 ,b1169 ,putative ATP-binding component of a transport system ,3.04
+ycgH_2 ,b1170 ,putative part of putative ATP-binding component of a transport system ,2.31
+ydbK ,b1378 ,"putative oxidoreductase, Fe-S subunit ",3.52
+yddA ,b1496 ,putative ATP-binding component of a transport system ,2.3
+yeaW ,b1802 ,predicted 2Fe-2S cluster-containing protein ,2.36
+yfdE ,b2371 ,"predicted CoA-transferase, NAD(P)-binding ",2.23
+ygcN ,b2766 ,predicted oxidoreductase with FAD/NAD(P)-binding domain ,2.2
+ygcR ,b2770 ,putative transport protein ,2.18
+ygcU ,b2773 ,putative oxidoreductase subunit ,2.03
+yhiD ,b3508 ,putative Mg(2+)transport ATPase ,2.11
+yiaK ,b3575 ,putative dehydrogenase ,2.17
+yiaY ,b3589 ,putative oxidoreductase ,2.41
+yjiL ,b4334 ,"putative ATPase, activator of(R)-hydroxyglutaryl-CoA dehydartase ",2.14
+ykgD ,b0305 ,putative ARAC-type regulatory protein ,2.03
+ykgE ,b0306 ,putative dehydrogenase subunit ,2.09
+ylbF ,b0520 ,response transcriptional regulator for torA (sensor TorS) ,2.1
+ynbB ,b1409 ,putative phosphatidate cytidiltransferase ,2.56
+yodB ,b1974 ,cytochrome b561 homolog 1 ,2.05
+yqhD ,b3011 ,putative oxidoreductase ,3.92
+arsB ,b3502 ,arsenical pump membrane protein ,2.39
+aslA ,b3801 ,arylsulfatase ,2.33
+clcB ,b1592 ,"chloride channel, voltage-gated ",2.01
+cynS ,b0340 ,cyanate aminohydrolase ,2.31
+cynT ,b0339 ,carbonic anhydrase ,2.07
+cynX ,b0341 ,cyanate transport ,2.17
+focB ,b2492 ,probable formate transporter (formate channel 2) ,2.36
+katE ,b1732 ,catalase; hydroperoxidase HPII(III) ,2.84
+mgtA ,b4242 ,"Mg2+ transport ATPase, P-type 1 ",3.86
+narK ,b1223 ,nitrite extrusion protein ,2.54
+nrfD ,b4073 ,formate-dependent nitrate reductase complex; transmembrane protein ,2.26
+phnD ,b4105 ,periplasmic binding protein component of Pn transporter ,2.11
+phnE ,b4104 ,membrane channel protein component of Pn transporter ,2.17
+phnG ,b4101 ,phosphonate metabolism ,2.13
+phnH ,b4100 ,phosphonate metabolism ,2.02
+phnI ,b4099 ,phosphonate metabolism ,2.07
+phnJ ,b4098 ,phosphonate metabolism ,2.09
+pitB ,b2987 ,low-affinity phosphate transport ,2.03
+zinT ,b1973 ,"zinc and cadmium binding protein, periplasmic ",3.78
+znuA ,b1857 ,"cyanate aminohydrolase, cyanase ",2.31
+gspC ,b3324 ,"general secretory pathway component, cryptic ",2.24
+gspJ ,b3331 ,"general secretory pathway component, cryptic ",2.29
+gspK ,b3332 ,"general secretory pathway component, cryptic ",2.4
+gspL ,b3333 ,"general secretory pathway component, cryptic ",2.02
+spy ,b1743 ,periplasmic protein related to spheroblast formation ,2.68
+yghE ,b2969 ,putative general secretion pathway for protein export (GSP) ,2.46
+aes ,b0476 ,acetyl esterase ,2.05
+atoA ,b2222 ,acetyl-CoA:acetoacetyl-CoA transferase beta subunit ,2.22
+atoD ,b2221 ,acetyl-CoA:acetoacetyl-CoA transferase alpha subunit ,2.4
+caiD ,b0036 ,carnitine racemase ,2.89
+caiE ,b0035 ,stimulator of CaiD and CaiB enzyme activities ,2.41
+glxR ,b0509 ,"tartronate semialdehyde reductase, NADH-dependent ",2.16
+idnO ,b4266 ,5-keto-D-gluconate 5-reductase ,2.05
+prpD ,b0334 ,2-methylcitrate dehydratase ,2.09
+prpE ,b0335 ,propionyl-CoA synthetase ,2.34
+srlD ,b2705 ,glucitol (sorbitol)-6-phosphate dehydrogenase ,2.16
+ygbJ ,b2736 ,putative dehydrogenase ,2.19
+yihU ,b3882 ,putative dehydrogenase ,2.25
+hyuA ,b2873 ,D-stereospecific phenylhydantoinase ,2.4
+rihB ,b2162 ,ribonucleoside hydrolase 2 ,2.48
+rihc ,b0030 ,ribonucleoside hydrolase 3 ,2
+ssnA ,b2879 ,predicted chlorohydrolase/aminohydrolase ,2.3
+stpA ,b2669 ,"DNA binding protein, nucleoid-associated ",2.07
+xapA ,b2407 ,xanthosine phosphorylase ,2.7
+ybbY ,b0513 ,putative transport ,2.19
+yeiJ ,b2161 ,nucleoside permease ,2.42
+ygfO ,b2882 ,xanthine permease ,2
+ygfU ,b2888 ,putative permease ,2.22
+hscC ,b0650 ,DnaK-like protein ,2.4
+hslJ ,b1379 ,heat shock protein hslJ ,2.06
+htpG ,b0473 ,"chaperone Hsp90, heat shock protein C 62.5 ",2.08
+nrfF ,b4075 ,part of formate-dependent nitrite reductase complex ,2.21
+nrfG ,b4076 ,part of formate-dependent nitrite reductase complex ,2.32
+osmB ,b1283 ,osmotically inducible lipoprotein ,4.38
+osmC ,b1482 ,osmotically inducible protein ,3.15
+osmE ,b1739 ,activator of ntrL gene ,3.99
+osmY ,b4376 ,periplasmic protein ,2.61
+ycaL ,b0909 ,putative heat shock protein ,2.36
+yhbU ,b3158 ,putative collagenase ,2.03
+endA ,b2945 ,DNA-specific endonuclease I ,2.21
+fimE ,b4313 ,recombinase involved in phase variation; regulator for fimA ,2.59
+mutM ,b3635 ,formamidopyrimidine DNA glycosylase ,2.38
+nohB ,b0560 ,bacteriophage DNA packaging protein ,2.39
+polB ,b0060 ,DNA polymerase II ,2.02
+radC ,b3638 ,DNA repair protein ,2.38
+recE ,b1350 ,"exonuclease VIII, ds DNA exonuclease, 5 --> 3 specific ",2.6
+recX ,b2698 ,"regulator, OraA protein ",2.15
+wcaH ,b2051 ,GDP-mannose mannosyl hydrolase ,2.1
+yaiC ,b0385 ,"diguanylate cyclase of cellulose, biofilm, motility regulation ",2.41
+ybeS ,b0646 ,putative enzyme of polynucleotide modification ,2.18
+ydaV ,b1360 ,putative DNA replication factor ,2.34
+ydeO ,b1499 ,transcriptional activator for mdtEF ,2.66
+yeeS ,b2002 ,"putative DNA repair protein, RADC family ",2.21
+yfdL ,b2355 ,putative RNA polymerase beta ,2.75
+yfjY ,b2644 ,putative DNA repair protein ,2.66
+yghG ,b2971 ,restriction alleviation and modification enhancement ,2.05
+yhdJ ,b3262 ,DNA adenine methyltransferase ,2.21
+yicF ,b3647 ,putative enzyme ,2.08
+ykfG ,b0247 ,putative DNA repair protein ,2.43
+cchB ,b2456 ,detox protein ,2.29
+adrB ,b1815 ,predicted phosphodiesterase ,2.08
+fimZ ,b0535 ,fimbrial Z protein; probable signal transducer ,2.19
+glnG ,b3868 ,"response regulator for gln (sensor glnL) (nitrogen regulator I, NRI) ",2.21
+glnL ,b3869 ,"histidine protein kinase sensor for GlnG regulator (nitrogen regulator II,",3.02
+uhpB ,b3668 ,sensor histidine protein kinase phosphorylates UhpA ,2.01
+ycgG ,b1168 ,predicted cyclic-di-GMP phosphodiesterase ,2.18
+yjiY ,b4354 ,putative carbon starvation protein ,2.14
+adiY ,b4116 ,DNA-binding transcriptional activator ,2.15
+alpA ,b2624 ,prophage CP4-57 regulatory protein alpA ,2.19
+arsR ,b3501 ,transcriptional repressor of chromosomal ars operon ,2.07
+betI ,b0313 ,probably transcriptional repressor of bet genes ,3.42
+bglG ,b3723 ,positive regulation of bgl operon ,2.29
+dsdC ,b2364 ,D-serine dehydratase (deaminase) transcriptional activator ,2.39
+envR ,b3264 ,DNA-binding transcriptional regulator ,2.29
+fhlA ,b2731 ,"formate hydrogen-lyase transcriptional activator for fdhF, hyc and hyp",2.05
+fliA ,b1922 ,flagellar biosynthesis; alternative sigma factor 28; regulation of flagellar,3.25
+frvR ,b3897 ,putative frv operon regulatory protein ,2.64
+gatR ,b2087 ,"split galactitol utilization operon repressor, interrupted ",2.41
+htgA ,b0012 ,positive regulator for sigma 32 heat shock promoters ,2.42
+hyfR ,b2491 ,"DNA-binding transcriptional activator, formate sensing ",2.4
+lysR ,b2839 ,positive regulator for lys ,2.04
+rcsA ,b1951 ,"positive regulator for ctr capsule biosynthesis, positive transcription factor ",3.46
+rhmR ,b2248 ,putative regulator ,2.39
+rtcR ,b3422 ,sigma54-dependent regulator of rtcBA expression ,2.08
+ybeF ,b0629 ,putative transcriptional regulator LYSR-type ,2.37
+ybhD ,b0768 ,putative transcriptional regulator LYSR-type ,2.36
+ybiH ,b0796 ,putative transcriptional regulator ,2.29
+ycgW ,b1160 ,"Rpos stabilzer during Mg starvation, anti-RssB factor ",3.8
+ygeK ,b2855 ,putative 2-component transcriptional regulator ,2.22
+yidP ,b3684 ,putative transcriptional regulator ,2.32
+lysU ,b4129 ,"lysine tRNA synthetase, inducible; heat shock protein ",2
+prfH ,b0236 ,probable peptide chain release factor ,2.35
+micF ,b4439 ,antisense regulator of the translation of OmpF porin,3.16
