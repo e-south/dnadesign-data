@@ -115,7 +115,7 @@ Most of these datasets compare omics readouts between a single “target” and 
   - **Title**: *Proteomics and metabolic burden analysis to understand the impact of recombinant protein production in E. coli*  
   - **DOI**: [10.1038/s41598-024-63148-y](https://www.nature.com/articles/s41598-024-63148-y)
   - **Association**: Metabolic burden  
-  - **Comments**: Investigated parent vs. recombinant strains (induced at various time points) via proteomics to track expression burden.
+  - **Comments**: Investigated wild type vs. recombinant strains (inducing recombinant protein acyl-ACP reductase at various time points) via proteomics to track expression burden.
   - **Format**: Full source dataset available ✅
 
 #### Membrane Stress and Fatty Acid Production
@@ -137,10 +137,10 @@ Most of these datasets compare omics readouts between a single “target” and 
 #### Antibiotic Stress
 
 - **Bie *et al.***  
-  - **Title**: *Comparative Analysis of Transcriptomic Response of E. coli… to Nine Representative Classes of Antibiotics*  
+  - **Title**: *Comparative Analysis of Transcriptomic Response of Escherichia coli K-12 MG1655 to Nine Representative Classes of Antibiotics*  
   - **DOI**: [10.1128/spectrum.00317-23](https://journals.asm.org/doi/10.1128/spectrum.00317-23)
   - **Association**: Antibiotic response  
-  - **Comments**: A comprehensive RNA‐seq survey of how *E. coli* K‐12 MG1655 responds to multiple antibiotics, including ampicillin‐like β‐lactams.
+  - **Comments**: Performed transcriptomic analysis on how E. coli responds to nine representative classes of antibiotics (tetracycline, mitomycin C, imipenem, ceftazidime, kanamycin, ciprofloxacin, polymyxin E, erythromycin, and chloramphenicol).
   - **Format**: Full source dataset available ✅
 
 - **Deter *et al.***  
@@ -179,7 +179,10 @@ Most of these datasets compare omics readouts between a single “target” and 
   - **Title**: *Induction and Function of the Phage Shock Protein Extracytoplasmic Stress Response in Escherichia coli*  
   - **DOI**: [10.1074/jbc.M602323200](https://doi.org/10.1074/jbc.M602323200)  
   - **Association**: Phage shock response  
-  - **Comments**: Expressed Protein IV secretin to induce a Psp response; reported differentially expressed genes (DEGs) from transcriptomic analysis.
+  - **Comments**: Generated a microarray dataset comparing *E. coli* strains with and without Psp-inducing protein IV secretin stress.
+
+The module identifies up- and down-regulated genes using IQR-based outlier detection 
+applied to the log 'Fold regulation' distribution from a microarray dataset.
   - **Format**: List of up- and down-regulated genes available.
 
 ---
