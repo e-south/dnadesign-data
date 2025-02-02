@@ -80,7 +80,7 @@ Most of these datasets compare omics readouts between a single “target” and 
   - **DOI**: [10.1073/pnas.1819682116](https://pubmed.ncbi.nlm.nih.gov/30971496/)
   - **Association**: Stringent response  
   - **Comments**: RNA‐seq of *E. coli* with and without ppGpp‐binding sites on RNAP; extensive gene expression changes at 5–10 min.
-  - **Format**: List of up- and down-regulated genes available.
+  - **Format**: Full source dataset available ✅
 
 - **Traxler *et al.***  
   - **Title**: *Discretely calibrated regulatory loops controlled by ppGpp partition gene induction across the 'feast to famine' gradient in Escherichia coli*  
@@ -164,14 +164,14 @@ Most of these datasets compare omics readouts between a single “target” and 
   - **DOI**: [10.1038/s41598-020-74606-8](https://doi.org/10.1038/s41598-020-74606-8)  
   - **Association**: Heat shock response  
   - **Comments**: Applied RNA‐seq to capture early, middle, and late stages of heat stress (2 min–40 h), illuminating initiation, adaptation, and phenotypic plasticity phases in *E. coli*.
-  - **Format**: List of up- and down-regulated genes available.
+  - **Format**: Full source dataset available ✅
 
 - **Zhang *et al.***  
   - **Title**: *Heat-Shock Response Transcriptional Program Enables High-Yield and High-Quality Recombinant Protein Production in Escherichia coli*  
   - **DOI**: [10.1021/cb5004477](https://doi.org/10.1021/cb5004477)  
   - **Association**: Heat shock response  
   - **Comments**: Demonstrated that a σ^32‐I54N HSR-like reprogrammed proteostasis network can boost soluble, folded, and functional recombinant proteins
-  - **Format**: List of up-regulated genes (no down-) available.
+  - **Format**: List of up-regulated genes (no down-regulated) available.
 
 #### Phage Shock Response
 

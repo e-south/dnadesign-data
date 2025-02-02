@@ -1,4 +1,4 @@
-Gene name,Gene ID ,Functional description ,Fold change,Direction
+Gene name,Gene ID,Functional description,Fold change,Direction
 adiA ,b4117 ,biodegradative arginine decarboxylase ,2.45,upregulated
 afuC ,b0262 ,putative ATP-binding component of a transport system ,2.02,upregulated
 ansB ,b2957 ,periplasmic L-asparaginase II ,2.28,upregulated
