@@ -249,6 +249,12 @@ applied to the log 'Fold regulation' distribution from a microarray dataset.
   - **Association**: Promoter prediction  
   - **Comments**: Built a multiclass CNN for promoter identification/classification using a RegulonDB v9.3 dataset.
 
+- **Hossain *et al.***  
+  - **Title**: *Automated design of thousands of nonrepetitive parts for engineering stable genetic systems*  
+  - **DOI**: [10.1038/s41587-020-0584-2](https://www.nature.com/articles/s41587-020-0584-2)
+  - **Association**: Promoter characterization  
+  - **Comments**: Created/characterized 4,350 *E. coli* promoters and 1,722 yeast promoters, achieving large dynamic range.
+
 - **Johns *et al.***  
   - **Title**: *Metagenomic mining of regulatory elements enables programmable species-selective gene expression*  
   - **DOI**: [10.1038/nmeth.4633](https://www.nature.com/articles/nmeth.4633)
@@ -261,11 +267,11 @@ applied to the log 'Fold regulation' distribution from a microarray dataset.
   - **Association**: Promoter engineering 
   - **Comments**: Synthesized 12,563 combinations of common promoters and ribosome binding sites and simultaneously measured DNA, RNA, and protein levels from the entire library. 
 
-- **Thomason *et al.***  
-  - **Title**: *Global Transcriptional Start Site Mapping Using Differential RNA Sequencing Reveals Novel Antisense RNAs in Escherichia coli*  
-  - **DOI**: [10.1128/JB.02096-14](https://journals.asm.org/doi/10.1128/jb.02096-14)
-  - **Association**: Transcription start site mapping  
-  - **Comments**: dRNA‐seq approach to distinguish primary vs. processed transcripts, with an automated TSS‐calling algorithm.
+- **LaFleur *et al.***  
+  - **Title**: *Automated model-predictive design of synthetic promoters to control transcriptional profiles in bacteria*  
+  - **DOI**: [10.1038/s41467-022-32829-5](https://www.nature.com/articles/s41467-022-32829-5)
+  - **Association**: Promoter characterization  
+  - **Comments**: Combined high‐throughput assays, biophysical models, and machine learning to design 34k+ promoters.
 
 - **Sun Yim *et al.***  
   - **Title**: *Multiplex transcriptional characterizations across diverse bacterial species using cell-free systems*  
@@ -273,11 +279,11 @@ applied to the log 'Fold regulation' distribution from a microarray dataset.
   - **Association**: Promoter prediction  
   - **Comments**: Used active lysates from 10 bacterial species to measure transcription activities of thousands of regulatory sequences.
 
-- **Yu *et al.***  
-  - **Title**: *Multiplexed characterization of rationally designed promoter architectures deconstructs combinatorial logic for IPTG-inducible systems*  
-  - **DOI**: [10.1038/s41467-020-20094-3](https://www.nature.com/articles/s41467-020-20094-3)
-  - **Association**: Promoter characterization  
-  - **Comments**: Profiled expression of 8269 IPTG‐inducible promoters that vary RNAP and LacI‐binding sites.
+- **Thomason *et al.***  
+  - **Title**: *Global Transcriptional Start Site Mapping Using Differential RNA Sequencing Reveals Novel Antisense RNAs in Escherichia coli*  
+  - **DOI**: [10.1128/JB.02096-14](https://journals.asm.org/doi/10.1128/jb.02096-14)
+  - **Association**: Transcription start site mapping  
+  - **Comments**: dRNA‐seq approach to distinguish primary vs. processed transcripts, with an automated TSS‐calling algorithm.
 
 - **Urtecho *et al.***  
   - **Title**: *Systematic Dissection of Sequence Elements Controlling σ70 Promoters Using a Genomically Encoded Multiplexed Reporter Assay in Escherichia coli*  
@@ -285,17 +291,11 @@ applied to the log 'Fold regulation' distribution from a microarray dataset.
   - **Association**: Promoter characterization  
   - **Comments**: A 10,898‐variant library dissecting −35, −10, UP elements, and spacers to evaluate σ70‐dependent expression.
 
-- **LaFleur *et al.***  
-  - **Title**: *Automated model-predictive design of synthetic promoters to control transcriptional profiles in bacteria*  
-  - **DOI**: [10.1038/s41467-022-32829-5](https://www.nature.com/articles/s41467-022-32829-5)
+- **Yu *et al.***  
+  - **Title**: *Multiplexed characterization of rationally designed promoter architectures deconstructs combinatorial logic for IPTG-inducible systems*  
+  - **DOI**: [10.1038/s41467-020-20094-3](https://www.nature.com/articles/s41467-020-20094-3)
   - **Association**: Promoter characterization  
-  - **Comments**: Combined high‐throughput assays, biophysical models, and machine learning to design 34k+ promoters.
-
-- **Hossain *et al.***  
-  - **Title**: *Automated design of thousands of nonrepetitive parts for engineering stable genetic systems*  
-  - **DOI**: [10.1038/s41587-020-0584-2](https://www.nature.com/articles/s41587-020-0584-2)
-  - **Association**: Promoter characterization  
-  - **Comments**: Created/characterized 4,350 *E. coli* promoters and 1,722 yeast promoters, achieving large dynamic range.
+  - **Comments**: Profiled expression of 8269 IPTG‐inducible promoters that vary RNAP and LacI‐binding sites.
 
 ---
 
