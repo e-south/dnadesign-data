@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import io
+import json
 import tarfile
 import zipfile
 from pathlib import Path
@@ -15,15 +16,41 @@ def _write_distributions(
     *,
     wheel_members: dict[str, bytes] | None = None,
     sdist_members: dict[str, bytes] | None = None,
+    archive_name: str = "dnadesign_data",
+    archive_version: str = "1.0",
+    metadata_name: str = "dnadesign-data",
 ) -> Path:
+    (root / "pyproject.toml").write_text(
+        '[project]\nname = "dnadesign-data"\nversion = "1.0"\n', encoding="utf-8"
+    )
     dist = root / "dist"
     dist.mkdir()
-    wheel_payload = wheel_members or {"dnadesign_data/module.py": b"value = 1\n"}
-    sdist_payload = sdist_members or {"dnadesign_data-1.0/module.py": b"value = 1\n"}
-    with zipfile.ZipFile(dist / "dnadesign_data-1.0-py3-none-any.whl", "w") as archive:
+    metadata = (
+        f"Metadata-Version: 2.4\nName: {metadata_name}\nVersion: {archive_version}\n"
+    ).encode()
+    wheel_payload = {
+        "dnadesign_data/__init__.py": b'"""Package."""\n',
+        f"{archive_name}-{archive_version}.dist-info/METADATA": metadata,
+        f"{archive_name}-{archive_version}.dist-info/RECORD": b"",
+        f"{archive_name}-{archive_version}.dist-info/WHEEL": b"Wheel-Version: 1.0\n",
+        **(wheel_members or {}),
+    }
+    sdist_root = f"{archive_name}-{archive_version}"
+    sdist_payload = {
+        f"{sdist_root}/PKG-INFO": metadata,
+        f"{sdist_root}/pyproject.toml": (
+            f'[project]\nname = "{metadata_name}"\nversion = "{archive_version}"\n'
+        ).encode(),
+        f"{sdist_root}/src/dnadesign_data/__init__.py": b'"""Package."""\n',
+        **(sdist_members or {}),
+    }
+    wheel_name = f"{archive_name}-{archive_version}-py3-none-any.whl"
+    with zipfile.ZipFile(dist / wheel_name, "w") as archive:
         for name, raw in wheel_payload.items():
             archive.writestr(name, raw)
-    with tarfile.open(dist / "dnadesign_data-1.0.tar.gz", "w:gz") as archive:
+    with tarfile.open(
+        dist / f"{archive_name}-{archive_version}.tar.gz", "w:gz"
+    ) as archive:
         for name, raw in sdist_payload.items():
             member = tarfile.TarInfo(name)
             member.size = len(raw)
@@ -58,6 +85,70 @@ def test_package_gate_rejects_source_or_generated_data_shelf(tmp_path: Path) -> 
         sum("private or repository data shelf is packaged" in error for error in errors)
         == 2
     )
+
+
+def test_package_gate_rejects_neutral_data_members(tmp_path: Path) -> None:
+    dist = _write_distributions(
+        tmp_path,
+        wheel_members={"dnadesign_data/review.tsv": b"record\tvalue\n"},
+        sdist_members={"dnadesign_data-1.0/review.parquet": b"PAR1"},
+    )
+
+    errors = check_package_artifacts(dist)
+
+    assert (
+        sum("data-like member is not allowed in package" in error for error in errors)
+        == 2
+    )
+
+
+def test_package_gate_rejects_canonical_nonpublic_posture_json(tmp_path: Path) -> None:
+    posture_key = "redistribution_" + "status"
+    private_posture = "private_" + "storage"
+    review_posture = "review_" + "blocked"
+    private_json = (
+        json.dumps(
+            {"records": ["ACTG"], posture_key: private_posture},
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        + "\n"
+    ).encode()
+    review_json = (
+        json.dumps(
+            {"records": ["ACTG"], posture_key: review_posture},
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        + "\n"
+    ).encode()
+    dist = _write_distributions(
+        tmp_path,
+        wheel_members={"dnadesign_data/private.json": private_json},
+        sdist_members={"dnadesign_data-1.0/review.json": review_json},
+    )
+
+    errors = check_package_artifacts(dist)
+
+    assert (
+        sum("nonpublic redistribution posture is packaged" in error for error in errors)
+        == 2
+    )
+
+
+def test_package_gate_rejects_unrelated_distribution_identity(tmp_path: Path) -> None:
+    dist = _write_distributions(
+        tmp_path,
+        archive_name="unrelated",
+        archive_version="2.0",
+        metadata_name="unrelated",
+    )
+
+    errors = check_package_artifacts(dist)
+
+    assert any("wheel filename does not match pyproject" in error for error in errors)
+    assert any("sdist filename does not match pyproject" in error for error in errors)
+    assert any("required package member is missing" in error for error in errors)
 
 
 def test_package_gate_rejects_machine_home_and_credentials(tmp_path: Path) -> None:
