@@ -82,7 +82,9 @@ consuming it there.
 Motif-source flow has three owner boundaries: this repository preserves source
 identity and deterministic export; a study owns alignment, site-window, and
 model-selection policy; Motif Balance owns scoring and design from
-`motif-model/v1`. Storage owns artifact placement, not biological semantics.
+`motif-model/v2`. Historical `motif-model/v1` artifacts remain readable but are
+not the current handoff. Storage owns artifact placement, not biological
+semantics.
 
 ## Non-Goals
 

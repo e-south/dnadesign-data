@@ -35,15 +35,14 @@ The Python facade exposes the same bounded capability catalog as
   in each export manifest. JASPAR identifies its data as CC BY 4.0;
   attribution and record links remain attached through the source descriptor
   and bytes. These clean-room models are deterministic and have accepted owner
-  receipts bound to the newly advertised clean-room root.
+  receipts bound to the advertised clean-room root.
 - `jaspar_2026_core_counts` describes 16 exact JASPAR CORE 2026 count records
-  retrieved through the official matrix API. Twelve human records form a
-  coherent higher-order candidate set. Two *Arabidopsis thaliana* and two
-  *Drosophila melanogaster* records provide fresh within-context pair
-  candidates. Their record ledger preserves source IDs, taxa, assay labels,
-  widths, mean observed counts, rights posture, retrieval URLs, source digests,
-  and development-exposure state. Converted artifacts are deterministic and
-  carry accepted receipts bound to the publicly advertised clean-room root.
+  retrieved through the official matrix API: twelve human, two *Arabidopsis
+  thaliana*, and two *Drosophila melanogaster* records. Their record ledger
+  preserves source IDs, taxa, assay labels, widths, mean observed counts,
+  rights posture, retrieval URLs, source digests, and development-exposure
+  state. Converted artifacts are deterministic and carry accepted receipts
+  bound to the publicly advertised clean-room root.
 - `hocomoco_14_core_meme` describes selected HOCOMOCO 14 CORE probability
   matrices. The first bounded set contains MAX (`MAX.H14CORE.0.PS.A`), MYCN
   (`MYCN.H14CORE.0.PS.A`), and SP1 (`SP1.H14CORE.0.P.B`). HOCOMOCO publishes
@@ -81,8 +80,8 @@ are replayed during receipt validation.
 - Choudhary *et al.* BaeR evidence already has a named private hydration
   adapter. It should feed a typed site set after authorized hydration, not a
   hidden fallback model.
-- A second biological or taxonomic context may add another named descriptor
-  and provider only when a real study task requires it.
+- Add another named descriptor or provider only when a required source shape
+  cannot be represented faithfully by an existing route.
 
 ## Deliberately Deferred Sources
 

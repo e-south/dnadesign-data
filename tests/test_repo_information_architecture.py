@@ -38,6 +38,7 @@ def test_readme_is_a_light_router_with_banner() -> None:
     assert len(lines) <= 120
     assert "assets/dnadesign-data-wordmark.svg" in text
     assert "docs/data-sources/README.md" in text
+    assert "docs/motif-sources/README.md" in text
     assert "docs/functional-annotations.md" in text
     assert "https://github.com/e-south/dnadesign" in text
     assert "## Package Boundary" not in text
@@ -159,6 +160,22 @@ def test_motif_source_docs_keep_product_and_study_policy_out() -> None:
     assert "site window" in text.lower()
     assert "study-owned" in text.lower()
     assert "binding-site-set/v1" in text
+
+
+def test_motif_source_handoff_uses_current_schema_and_owner_boundaries() -> None:
+    architecture = (ROOT / "ARCHITECTURE.md").read_text(encoding="utf-8")
+    index = (ROOT / "docs/motif-sources/README.md").read_text(encoding="utf-8")
+    providers = (ROOT / "docs/motif-sources/providers.md").read_text(encoding="utf-8")
+    release_notes = (ROOT / "docs/dev/README.md").read_text(encoding="utf-8")
+
+    assert "scoring and design from\n`motif-model/v2`" in architecture
+    assert "Historical `motif-model/v1` artifacts remain readable" in architecture
+    assert "source-attested motif records" in index
+    assert "transcription-factor binding evidence" not in index
+    assert "higher-order candidate set" not in providers
+    assert "within-context pair" not in providers
+    assert "latest advertised data release is `v0.1.0a4`" in release_notes
+    assert "intended next data release" not in release_notes
 
 
 def test_ci_uses_uv_cache_precommit_and_docs_checks() -> None:

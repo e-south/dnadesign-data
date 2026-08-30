@@ -16,6 +16,12 @@ The wheel contains the catalog and conversion code, not the source datasets.
 Use an explicit repository checkout or data mirror when resolving source
 records.
 
+The owner handoff is narrow: `dnadesign-data` preserves source identity, rights
+posture, deterministic conversion, and receipts; Motif Balance owns scoring and
+design from the resulting `motif-model/v2`; research studies own task selection
+and interpretation. Start with [Motif source exports](docs/motif-sources/README.md)
+for the supported source-to-model routes.
+
 The repository intentionally contains no RegulonDB, EcoCyc, O'Malley, or other
 literature-source payloads. Code for explicitly supplied local inputs remains
 available for authorized workflows. See [Third-party data](THIRD_PARTY_DATA.md)
@@ -30,6 +36,8 @@ for the closed byte inventory.
   adapter workflows, package APIs, credentials, CI, and agent work.
 - [Data sources](docs/data-sources/README.md): retained public sources and the
   boundary for externally supplied local data.
+- [Motif source exports](docs/motif-sources/README.md): deterministic model and
+  binding-site-set handoffs for Motif Balance.
 - [Package APIs](docs/package-apis.md): public catalog modules and source CLI
   for downstream tools.
 - [Functional annotations](docs/functional-annotations.md): EcoCyc/GO artifacts,

@@ -57,12 +57,15 @@ The GitHub Actions workflow mirrors the local checks:
 - package build smoke on Python 3.12.
 - exact wheel/sdist inventory and package privacy inspection.
 
-## Public release bootstrap
+## Public release verification
 
-The intended next data release is `v0.1.0a4`, matching the project version.
-The tag gate requires a clean tag at `HEAD` and exactly one rooted public
-history. The first push may have an all-zero GitHub `before` SHA; the
-publication check treats that event as a diff from Git's empty tree.
+The latest advertised data release is `v0.1.0a4`. Current `main` contains
+post-release validation hardening and is not itself a tagged release. This page
+does not reserve the next version. When a release is authorized, choose its
+version explicitly and require the candidate tag to match the project version
+at a clean `HEAD` with exactly one rooted public history. An initial public
+push may have an all-zero GitHub `before` SHA; the publication check treats
+that event as a diff from Git's empty tree.
 
 Publish the prepared root before creating repository-revision receipts. After
 the canonical remote advertises that exact root, create the receipts and pool
@@ -71,8 +74,8 @@ rerun every gate. Tag only after that receipt-bootstrap commit is complete.
 
 The final release verification clone must be made from the published root with
 `git clone --no-local --no-tags --single-branch` into a new directory. Fetch
-only the intended release tag after verifying the canonical public branch. This
+only the candidate release tag after verifying the canonical public branch. This
 no-local/no-extra-tags clone is required because a copied `.git` directory can
 retain unreachable objects from superseded private history even when the
 visible branch has one root. Run the full checks and
-`dnadesign-data-public-tree --require-tag v0.1.0a4` in that clone.
+`dnadesign-data-public-tree --require-tag <release-tag>` in that clone.
