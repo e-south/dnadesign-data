@@ -142,9 +142,11 @@ The receipt binds:
 - content-bound, byte-verified Git reference;
 - resolved redistribution status.
 
-Review-blocked and link-only inputs cannot receive an accepted receipt. Storage
-references currently fail closed: the Storage object schema is moving and this
-package has no stable verifier for its object digest or member bytes. A future
-Storage receipt requires an explicit verifier contract; a path or reference
-string alone is not authority. Receipt creation does not turn product dogfood
-into scientific evidence; evidence acceptance remains study-owned.
+Review-blocked and link-only inputs cannot receive an accepted receipt. A
+`private_storage` probability-model source may use the narrow Storage receipt
+route. It requires the stable `dnadesign.storage-object/v1` verifier, an
+authoritative `dnadesign-data` private motif store produced by the advertised
+converter revision, and exact `input` and `artifact` member digests for the
+source report and canonical model. A path or reference string alone is not
+authority. Receipt creation does not turn product dogfood into scientific
+evidence; evidence acceptance remains study-owned.

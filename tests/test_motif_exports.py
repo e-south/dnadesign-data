@@ -394,7 +394,7 @@ letter-probability matrix: alength= 4 w= 1 nsites= 1 E= 0
     assert export["manifest"]["source"]["revision"] == (
         "s41592-021-01312-2-supplementary-data-2"
     )
-    assert export["manifest"]["source"]["redistribution_status"] == ("review_blocked")
+    assert export["manifest"]["source"]["redistribution_status"] == ("private_storage")
     parameters = inspect.signature(build_meme_motif_export).parameters
     assert "source_revision" not in parameters
     assert "redistribution_status" not in parameters

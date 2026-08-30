@@ -59,9 +59,11 @@ The Python facade exposes the same bounded capability catalog as
   clean-room models likewise carry accepted receipts bound to the publicly
   advertised clean-room root.
 - `omalley_2021_ecoli_meme` describes the O'Malley *et al.* supplementary
-  *E. coli* MEME reports. Its redistribution status remains `review_blocked`,
-  so derived models are suitable for contract testing but not an accepted
-  authority receipt until that posture is resolved.
+  *E. coli* MEME reports. Its redistribution status is `private_storage`:
+  neither source reports nor derived model bytes belong in this public tree.
+  A private model may receive an accepted receipt only when one verified
+  `dnadesign.storage-object/v1` store binds the exact source and model members
+  to an advertised `dnadesign-data` converter revision.
 - `regulondb_13_tf_riset_sites` describes the release-13 TF-RISet site table.
   Its derived records remain `private_storage` under the current source terms.
 
