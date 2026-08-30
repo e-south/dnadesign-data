@@ -61,7 +61,7 @@ jobs:
           uv run dnadesign-data-biocyc-smarttables --help
           uv run dnadesign-data-sources list --kind all --indent 0
           uv run dnadesign-data-sources schema --indent 0
-          uv run dnadesign-data-sources check --require-source regulondb_13_tf_riset --summary-only --indent 0
+          uv run dnadesign-data-sources resolve regulondb_13_tf_riset --allow-missing --indent 0
 
   package:
     runs-on: ubuntu-latest

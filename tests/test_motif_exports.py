@@ -38,6 +38,28 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _assert_checked_receipt(
+    bundle: Path, monkeypatch: pytest.MonkeyPatch
+) -> dict[str, object]:
+    receipt = json.loads((bundle / "receipt.json").read_text(encoding="utf-8"))
+    owner_revision = receipt["owner_revision"]
+    monkeypatch.setattr(
+        receipt_module,
+        "_query_canonical_remote_revisions",
+        lambda: frozenset({owner_revision}),
+    )
+    assert (
+        revalidate_motif_export_receipt(
+            bundle,
+            receipt,
+            owner_repository_path=Path.cwd(),
+            data_root=Path.cwd(),
+        )
+        == receipt
+    )
+    return receipt
+
+
 def _write_catalog_meme(root: Path, name: str, content: str) -> Path:
     source = root / "sources/literature/OMalley_et_al/escherichia_coli_motifs" / name
     source.parent.mkdir(parents=True)
@@ -666,6 +688,7 @@ def test_hocomoco_14_core_models_reuse_the_bounded_meme_contract(
     motif_id: str,
     width: int,
     source_sha256: str,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     source = Path("sources/databases/hocomoco/14/CORE") / source_name
 
@@ -706,7 +729,9 @@ def test_hocomoco_14_core_models_reuse_the_bounded_meme_contract(
         json.loads((generated / "manifest.json").read_text(encoding="utf-8"))
         == first["manifest"]
     )
-    assert not (generated / "receipt.json").exists()
+    receipt = _assert_checked_receipt(generated, monkeypatch)
+    assert receipt["motif_id"] == motif_id
+    assert receipt["model_digest"] == first["manifest"]["model_digest"]
 
 
 def test_hocomoco_14_record_ledger_binds_the_admitted_source_set() -> None:
@@ -777,6 +802,8 @@ def test_jaspar_2026_count_panel_replays_source_models_and_freshness() -> None:
 @pytest.mark.parametrize(
     ("collection", "motif_id", "descriptor_id", "source_revision"),
     [
+        ("development-exposed-v2", "CEBPB", "jaspar_2026_core_meme", "2026"),
+        ("development-exposed-v2", "RELA", "jaspar_2026_core_meme", "2026"),
         ("development-exposed-v2", "FOS_JUN", "jaspar_2026_core_meme", "2026"),
         ("development-exposed-v2", "GATA1", "jaspar_2026_core_meme", "2026"),
         ("development-exposed-v2", "TAL1_TCF3", "jaspar_2026_core_meme", "2026"),
@@ -789,22 +816,25 @@ def test_jaspar_2026_count_panel_replays_source_models_and_freshness() -> None:
         ("development-exposed-v2", "SP1", "hocomoco_14_core_meme", "14"),
     ],
 )
-def test_active_development_panel_has_replayable_pending_receipt_bundles(
+def test_active_development_panel_has_replayable_accepted_receipt_bundles(
     collection: str,
     motif_id: str,
     descriptor_id: str,
     source_revision: str,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     bundle = Path("generated/motif_models") / collection / motif_id
     artifact = json.loads((bundle / "artifact.json").read_text(encoding="utf-8"))
     manifest = json.loads((bundle / "manifest.json").read_text(encoding="utf-8"))
-    assert not (bundle / "receipt.json").exists()
+    receipt = _assert_checked_receipt(bundle, monkeypatch)
     assert artifact["schema_version"] == "motif-model/v2"
     assert artifact["motif_id"] == motif_id
     assert manifest["model_digest"]
     assert manifest["source"]["descriptor_id"] == descriptor_id
     assert manifest["source"]["revision"] == source_revision
     assert manifest["source"]["redistribution_status"] == "redistributable"
+    assert receipt["status"] == "accepted"
+    assert receipt["model_digest"] == manifest["model_digest"]
 
 
 def test_probability_normalization_uses_cross_python_fsum_semantics() -> None:

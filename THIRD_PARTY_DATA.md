@@ -23,7 +23,7 @@ authorized callers can use separately supplied local data. Their presence is
 not a grant to redistribute those external sources.
 
 The motif artifacts are deterministic project-generated representations of
-the named source matrices. Repository-revision receipts are intentionally
-absent from the clean-room initial commit. They must be regenerated only after
-the new canonical remote advertises the exact commit containing these bytes.
-No retained bundle currently has an accepted owner receipt.
+the named source matrices. Repository-revision receipts were intentionally
+absent from the clean-room initial commit and were issued only after the new
+canonical remote advertised the exact source and model commit. Every retained
+bundle now has an accepted owner receipt bound to that advertised revision.

@@ -34,18 +34,16 @@ The Python facade exposes the same bounded capability catalog as
   and their canonical models use the explicit probability mixture documented
   in each export manifest. JASPAR identifies its data as CC BY 4.0;
   attribution and record links remain attached through the source descriptor
-  and bytes. These clean-room models are deterministic but have no accepted
-  owner receipts yet; receipt bootstrap follows publication of the new
-  canonical root.
+  and bytes. These clean-room models are deterministic and have accepted owner
+  receipts bound to the newly advertised clean-room root.
 - `jaspar_2026_core_counts` describes 16 exact JASPAR CORE 2026 count records
   retrieved through the official matrix API. Twelve human records form a
   coherent higher-order candidate set. Two *Arabidopsis thaliana* and two
   *Drosophila melanogaster* records provide fresh within-context pair
   candidates. Their record ledger preserves source IDs, taxa, assay labels,
   widths, mean observed counts, rights posture, retrieval URLs, source digests,
-  and development-exposure state. Converted artifacts are deterministic but
-  remain `conversion_verified_pending_receipt` until their owner revision is
-  publicly advertised and accepted receipts are issued.
+  and development-exposure state. Converted artifacts are deterministic and
+  carry accepted receipts bound to the publicly advertised clean-room root.
 - `hocomoco_14_core_meme` describes selected HOCOMOCO 14 CORE probability
   matrices. The first bounded set contains MAX (`MAX.H14CORE.0.PS.A`), MYCN
   (`MYCN.H14CORE.0.PS.A`), and SP1 (`SP1.H14CORE.0.P.B`). HOCOMOCO publishes
@@ -58,8 +56,8 @@ The Python facade exposes the same bounded capability catalog as
   models are deterministic derivatives: the shared MEME conversion applies
   the manifest-declared `probability_matrix_prior_mixture_v1` with weight 0.1,
   so their probabilities are not literal copies of the source rows. These
-  clean-room models likewise remain `conversion_verified_pending_receipt`
-  until the new canonical root is publicly advertised and receipted.
+  clean-room models likewise carry accepted receipts bound to the publicly
+  advertised clean-room root.
 - `omalley_2021_ecoli_meme` describes the O'Malley *et al.* supplementary
   *E. coli* MEME reports. Its redistribution status remains `review_blocked`,
   so derived models are suitable for contract testing but not an accepted

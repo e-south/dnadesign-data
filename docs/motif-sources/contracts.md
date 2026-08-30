@@ -131,8 +131,8 @@ The clean-room release lifecycle is publish the new root first, then issue
 receipts. Source, model, and exposure-ledger bytes enter `main`; once that exact
 root is advertised, the content commit may receive receipts in a subsequent
 commit. A release tag can add an immutable anchor, but it never replaces or
-mutates receipt bytes. This prepared tree contains no accepted receipts from the
-superseded repository history.
+mutates receipt bytes. The current receipts were freshly issued against the new
+clean-room root; none were inherited from the superseded repository history.
 The receipt binds:
 
 - data-owner repository and revision;

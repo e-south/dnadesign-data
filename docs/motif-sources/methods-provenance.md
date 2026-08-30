@@ -76,12 +76,11 @@ ledger update to retain its parent's model and task entries.
 
 Both the historical v1 and current v2 projections of the 12-model multi-source
 development panel are explicitly exposed.
-The new count-derived request currently reports `qualification_pending`: its
-receipts cannot be issued until the new source and model bytes exist at an
-advertised owner revision. Even `qualification_ready` is only a data-authority
-state; prospective study chronology is frozen by Research Studies. RegulonDB
-remains a private site-set route, and review-blocked O'Malley bytes are not used
-to fill that gap.
+The new count-derived request now reports `qualification_ready`: its receipts
+bind source and model bytes at the advertised clean-room revision. This remains
+only a data-authority state; prospective study chronology is frozen by Research
+Studies. RegulonDB remains a private site-set route, and review-blocked O'Malley
+bytes are not used to fill that gap.
 
 Database payload publication is independently gated by release-local rights and
 attribution records. Generated motif bundles must resolve to a redistributable
