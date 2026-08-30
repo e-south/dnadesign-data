@@ -1,0 +1,2 @@
+*.tsv whitespace=-blank-at-eol
+sources/databases/jaspar/**/*.meme whitespace=-blank-at-eof

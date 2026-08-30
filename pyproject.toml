@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69,<85", "wheel>=0.45,<0.48.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dnadesign-data"
+version = "0.0.0"
+description = "Source-backed biological data for sequence design"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "certifi>=2024.8.30",
+    "openpyxl>=3.1.5",
+    "pyfaidx>=0.9.0.3",
+]
+
+[project.scripts]
+dnadesign-data-bie = "dnadesign_data.literature.bie_et_al:main"
+dnadesign-data-biocyc-smarttables = "dnadesign_data.functional.biocyc_smarttables_cli:main"
+dnadesign-data-choudhary-baer = "dnadesign_data.literature.choudhary_et_al:main"
+dnadesign-data-ecocyc-go = "dnadesign_data.functional.ecocyc_go:main"
+dnadesign-data-motifs = "dnadesign_data.motifs.cli:main"
+dnadesign-data-public-tree = "dnadesign_data.devtools.public_tree_check:main"
+dnadesign-data-sources = "dnadesign_data.catalog.cli:main"
+
+[dependency-groups]
+dev = [
+    "pip-audit>=2.9.0",
+    "pre-commit>=4.3.0",
+    "pytest>=9.0.3,<10",
+    "ruff>=0.14.14",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

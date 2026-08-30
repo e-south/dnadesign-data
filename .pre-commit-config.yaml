@@ -1,0 +1,65 @@
+minimum_pre_commit_version: "4.3.0"
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    # v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c # pragma: allowlist secret
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=5000"]
+        exclude: ^(sources/|generated/|RegulonDB_|EcoCyc_|primary_literature/|GeneOntology/|BioCyc/)
+      - id: check-toml
+      - id: check-yaml
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: end-of-file-fixer
+        exclude: ^(sources/|generated/|RegulonDB_|EcoCyc_|primary_literature/|GeneOntology/|BioCyc/)
+      - id: trailing-whitespace
+        exclude: ^(sources/|generated/|RegulonDB_|EcoCyc_|primary_literature/|GeneOntology/|BioCyc/)
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    # 0.37.4
+    rev: 6b63472e72e1a91ed8a2f6d483790dfb644fa1d3 # pragma: allowlist secret
+    hooks:
+      - id: check-github-workflows
+  - repo: https://github.com/Yelp/detect-secrets
+    # v1.5.0
+    rev: 5e141933554a0b74e7341841f318be21e895339c # pragma: allowlist secret
+    hooks:
+      - id: detect-secrets
+        types: [text]
+        # PUBLIC_DATA_INVENTORY.json contains only gate-verified SHA-256 values.
+        exclude: ^(PUBLIC_DATA_INVENTORY\.json|sources/|generated/|RegulonDB_|EcoCyc_|primary_literature/|GeneOntology/|BioCyc/)
+      - id: detect-secrets
+        name: Detect secrets in source provenance
+        types: [text]
+        files: ^sources/(literature/[^/]+/(metadata\.json|README\.md|(raw|processed)/provenance/)|databases/.*/provenance/)
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: ruff-format
+        entry: uv run ruff format
+        language: system
+        types: [python]
+        files: ^(src|tests)/
+      - id: docs-check
+        name: docs-check
+        entry: uv run python -m dnadesign_data.devtools.docs_check
+        language: system
+        pass_filenames: false
+      - id: publication-check
+        name: publication-check
+        entry: uv run python -m dnadesign_data.devtools.publication_check
+        language: system
+        pass_filenames: false
+      - id: public-tree-check
+        name: public-tree-check
+        entry: uv run python -m dnadesign_data.devtools.public_tree_check
+        language: system
+        pass_filenames: false
+      - id: ruff-check
+        name: ruff-check
+        entry: uv run ruff check
+        language: system
+        types: [python]
+        files: ^(src|tests)/
