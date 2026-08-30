@@ -21,9 +21,29 @@ import pytest
 
 from dnadesign_data.devtools.publication_check import (
     ChangedPath,
+    _changed_paths,
     _validate_generated_motif_inventory,
     check_publication,
 )
+
+
+def test_initial_push_uses_empty_tree_when_before_is_all_zero(tmp_path: Path) -> None:
+    subprocess.run(["git", "init", "-q", "-b", "main"], cwd=tmp_path, check=True)
+    subprocess.run(["git", "config", "user.name", "Fixture"], cwd=tmp_path, check=True)
+    subprocess.run(
+        ["git", "config", "user.email", "fixture@example.test"],
+        cwd=tmp_path,
+        check=True,
+    )
+    source = tmp_path / "sources/databases/example/1/model.tsv"
+    source.parent.mkdir(parents=True)
+    source.write_text("record\n", encoding="utf-8")
+    subprocess.run(["git", "add", "."], cwd=tmp_path, check=True)
+    subprocess.run(["git", "commit", "-qm", "root"], cwd=tmp_path, check=True)
+
+    changes = _changed_paths(tmp_path, "0" * 40)
+
+    assert changes == (ChangedPath("A", "sources/databases/example/1/model.tsv"),)
 
 
 def _write_metadata(root: Path, *, status: str) -> Path:

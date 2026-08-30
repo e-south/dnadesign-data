@@ -34,9 +34,9 @@ The Python facade exposes the same bounded capability catalog as
   and their canonical models use the explicit probability mixture documented
   in each export manifest. JASPAR identifies its data as CC BY 4.0;
   attribution and record links remain attached through the source descriptor
-  and bytes. Every currently admitted JASPAR model has an accepted receipt
-  binding its canonical model and exact source blob to an advertised owner
-  revision.
+  and bytes. These clean-room models are deterministic but have no accepted
+  owner receipts yet; receipt bootstrap follows publication of the new
+  canonical root.
 - `jaspar_2026_core_counts` describes 16 exact JASPAR CORE 2026 count records
   retrieved through the official matrix API. Twelve human records form a
   coherent higher-order candidate set. Two *Arabidopsis thaliana* and two
@@ -57,9 +57,9 @@ The Python facade exposes the same bounded capability catalog as
   recorded in `sources/databases/hocomoco/14/CORE/records.tsv`. The canonical
   models are deterministic derivatives: the shared MEME conversion applies
   the manifest-declared `probability_matrix_prior_mixture_v1` with weight 0.1,
-  so their probabilities are not literal copies of the source rows. Each
-  admitted HOCOMOCO model has an accepted receipt binding the derivative model
-  and exact source blob to an advertised owner revision.
+  so their probabilities are not literal copies of the source rows. These
+  clean-room models likewise remain `conversion_verified_pending_receipt`
+  until the new canonical root is publicly advertised and receipted.
 - `omalley_2021_ecoli_meme` describes the O'Malley *et al.* supplementary
   *E. coli* MEME reports. Its redistribution status remains `review_blocked`,
   so derived models are suitable for contract testing but not an accepted

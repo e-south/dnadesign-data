@@ -8,6 +8,8 @@ uv run ruff check .
 uv run ruff format --check .
 uv run pre-commit run --all-files
 uv run python -m dnadesign_data.devtools.docs_check
+uv run python -m dnadesign_data.devtools.publication_check
+uv run python -m dnadesign_data.devtools.public_tree_check
 uv lock --check
 uv build
 git diff --check
@@ -52,3 +54,23 @@ The GitHub Actions workflow mirrors the local checks:
 - CLI smoke for public data adapters and the source catalog list/schema/check
   surface;
 - package build smoke on Python 3.12.
+
+## Public release bootstrap
+
+The intended next data release is `v0.1.0a2`, matching the project version.
+The tag gate requires a clean tag at `HEAD` and exactly one rooted public
+history. The first push may have an all-zero GitHub `before` SHA; the
+publication check treats that event as a diff from Git's empty tree.
+
+Publish the prepared root before creating repository-revision receipts. After
+the canonical remote advertises that exact root, create the receipts and pool
+inventories in a second commit, regenerate `PUBLIC_DATA_INVENTORY.json`, and
+rerun every gate. Tag only after that receipt-bootstrap commit is complete.
+
+The final release verification clone must be made from the published root with
+`git clone --no-local --no-tags --single-branch` into a new directory. Fetch
+only the intended release tag after verifying the canonical public branch. This
+no-local/no-extra-tags clone is required because a copied `.git` directory can
+retain unreachable objects from superseded private history even when the
+visible branch has one root. Run the full checks and
+`dnadesign-data-public-tree --require-tag v0.1.0a2` in that clone.

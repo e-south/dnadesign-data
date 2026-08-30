@@ -442,14 +442,31 @@ def _parse_name_status(raw: bytes) -> list[ChangedPath]:
 
 
 def _changed_paths(root: Path, base_ref: str | None) -> tuple[ChangedPath, ...]:
-    diff_target = "HEAD" if base_ref is None else f"{base_ref}...HEAD"
+    if base_ref and set(base_ref) == {"0"}:
+        empty_tree = subprocess.run(
+            ["git", "hash-object", "-t", "tree", "--stdin"],
+            cwd=root,
+            check=False,
+            input=b"",
+            capture_output=True,
+        )
+        if empty_tree.returncode != 0:
+            raise ValueError(
+                "cannot resolve Git empty tree for initial push: "
+                f"{empty_tree.stderr.decode(errors='replace').strip()}"
+            )
+        diff_target = empty_tree.stdout.decode("ascii").strip()
+        diff_revisions = [diff_target, "HEAD"]
+    else:
+        diff_target = "HEAD" if base_ref is None else f"{base_ref}...HEAD"
+        diff_revisions = [diff_target]
     diff = subprocess.run(
         [
             "git",
             "diff",
             "--name-status",
             "-z",
-            diff_target,
+            *diff_revisions,
             "--",
             "sources/literature",
             "sources/databases",

@@ -19,7 +19,6 @@ import re
 import stat
 import subprocess
 import sys
-import zipfile
 from collections.abc import Iterator, Sequence
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -28,6 +27,7 @@ from dnadesign_data.catalog.regulatory_parts import known_motif_source_files
 from dnadesign_data.devtools.generated_motif_check import (
     validate_generated_motif_inventory,
 )
+from dnadesign_data.devtools.public_tree_scan import scan_tracked_tree
 from dnadesign_data.motifs.contracts import MotifExportError
 from dnadesign_data.motifs.receipt_validation import revalidate_motif_export_receipt
 from dnadesign_data.motifs.receipts import validate_motif_export_source_replay
@@ -37,23 +37,11 @@ INVENTORY_PATH = PurePosixPath("PUBLIC_DATA_INVENTORY.json")
 INVENTORY_SCHEMA = "dnadesign-data.public-data-inventory/v1"
 RIGHTS_SCHEMA = "dnadesign-data.database-rights/v1"
 _DATA_PREFIXES = (PurePosixPath("sources"), PurePosixPath("generated/motif_models"))
-_OFFICE_SUFFIXES = {".docx", ".xlsx", ".pptx"}
-_MACHINE_PATH = re.compile(
-    rb"(?:file:/+)?/Users/[^/\x00\s<]+/|[A-Za-z]:[\\/]+Users[\\/]+[^\\/\x00\s<]+[\\/]"
-)
+_PROJECT_METADATA_PATHS = {
+    PurePosixPath("sources/motif-development/development-exposure-ledger.json")
+}
 _MAX_DATA_FILES = 10_000
 _MAX_DATA_FILE_BYTES = 64 * 1024 * 1024
-_MAX_OFFICE_MEMBERS = 10_000
-_MAX_OFFICE_MEMBER_BYTES = 16 * 1024 * 1024
-_IGNORED_WALK_NAMES = {
-    ".git",
-    ".pytest_cache",
-    ".ruff_cache",
-    ".venv",
-    "__pycache__",
-    "build",
-    "dist",
-}
 
 
 class PublicTreeError(ValueError):
@@ -179,7 +167,7 @@ def _entry_metadata(
             rights_ref.as_posix(),
             str(rights.get("redistribution_status", "unclassified")),
         )
-    if parts[:2] == ("sources", "motif-development"):
+    if relative in _PROJECT_METADATA_PATHS:
         return "project_metadata", None, "project_metadata"
     if parts[:3] == ("generated", "motif_models", "pools"):
         return "project_generated", None, "project_generated"
@@ -278,49 +266,6 @@ def _read_inventory(root: Path) -> tuple[dict[str, object] | None, list[str]]:
     return payload, []
 
 
-def _walk_office_archives(root: Path) -> Iterator[Path]:
-    pending = [root]
-    while pending:
-        directory = pending.pop()
-        for entry in sorted(os.scandir(directory), key=lambda item: item.name):
-            if entry.name in _IGNORED_WALK_NAMES:
-                continue
-            path = Path(entry.path)
-            if entry.is_symlink():
-                continue
-            if entry.is_dir(follow_symlinks=False):
-                pending.append(path)
-            elif (
-                entry.is_file(follow_symlinks=False)
-                and path.suffix.lower() in _OFFICE_SUFFIXES
-            ):
-                yield path
-
-
-def _check_office_archive(root: Path, path: Path) -> list[str]:
-    relative = path.relative_to(root).as_posix()
-    errors: list[str] = []
-    try:
-        with zipfile.ZipFile(path) as archive:
-            members = archive.infolist()
-            if len(members) > _MAX_OFFICE_MEMBERS:
-                return [f"{relative}: Office archive exceeds its member bound"]
-            for member in members:
-                if member.file_size > _MAX_OFFICE_MEMBER_BYTES:
-                    errors.append(
-                        f"{relative}: Office member {member.filename!r} exceeds its byte bound"
-                    )
-                    continue
-                raw = archive.read(member)
-                if _MACHINE_PATH.search(raw):
-                    errors.append(
-                        f"{relative}: Office member {member.filename!r} contains an embedded local machine path"
-                    )
-    except (OSError, zipfile.BadZipFile, RuntimeError) as exc:
-        errors.append(f"{relative}: cannot inspect Office archive: {exc}")
-    return errors
-
-
 def _check_generated_sources(root: Path) -> list[str]:
     errors = validate_generated_motif_inventory(root)
     bundles: set[Path] = set()
@@ -356,6 +301,7 @@ def check_public_tree(root: Path) -> list[str]:
 
     base = root.resolve()
     errors: list[str] = []
+    errors.extend(scan_tracked_tree(base, max_file_bytes=_MAX_DATA_FILE_BYTES))
     try:
         actual = build_public_data_inventory(base)
     except (OSError, UnicodeError, json.JSONDecodeError, PublicTreeError) as exc:
@@ -432,9 +378,24 @@ def check_public_tree(root: Path) -> list[str]:
                 if rights.get("redistribution_status") != "redistributable":
                     errors.append(f"{path}: rights metadata is not redistributable")
     errors.extend(_check_generated_sources(base))
-    for archive in _walk_office_archives(base):
-        errors.extend(_check_office_archive(base, archive))
     return sorted(set(errors))
+
+
+def _project_version(root: Path) -> str | None:
+    try:
+        lines = (root / "pyproject.toml").read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError):
+        return None
+    section = ""
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("[") and stripped.endswith("]"):
+            section = stripped
+            continue
+        if section == "[project]" and stripped.startswith("version"):
+            match = re.fullmatch(r'version\s*=\s*"([^"\s]+)"', stripped)
+            return match.group(1) if match else None
+    return None
 
 
 def check_tag_state(root: Path, tag: str) -> list[str]:
@@ -464,12 +425,26 @@ def check_tag_state(root: Path, tag: str) -> list[str]:
         text=True,
     )
     errors: list[str] = []
+    version = _project_version(root)
+    if version is None:
+        errors.append("cannot resolve [project] version from pyproject.toml")
+    elif tag != f"v{version}":
+        errors.append(f"release tag {tag!r} does not match project version {version!r}")
     if head.returncode != 0 or tagged.returncode != 0:
         errors.append(f"cannot resolve HEAD and local tag {tag!r}")
     elif head.stdout.strip() != tagged.stdout.strip():
         errors.append(f"HEAD is not exactly local tag {tag!r}")
     if status.returncode != 0 or status.stdout:
         errors.append("tag publication requires a clean closed worktree")
+    roots = subprocess.run(
+        ["git", "rev-list", "--max-parents=0", "--all"],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if roots.returncode != 0 or len(roots.stdout.splitlines()) != 1:
+        errors.append("tag publication requires one rooted public history")
     return errors
 
 

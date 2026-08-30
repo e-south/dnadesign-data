@@ -127,12 +127,12 @@ authority. It then size-bounds and compares both the
 model blob and the catalog source blob at that same revision byte-for-byte with
 the admitted bytes. A caller-configured `remote.origin.url` is not authority.
 
-The release lifecycle is merge first, then receipt issuance. Source, model, and
-exposure-ledger bytes enter `main`; once that integration anchor is advertised,
-the content commit may receive receipts. A release tag can add an immutable
-anchor, but it never replaces or mutates receipt bytes. Checked-in older receipts
-remain valid while their content commits are ancestors of a current integration
-or release anchor.
+The clean-room release lifecycle is publish the new root first, then issue
+receipts. Source, model, and exposure-ledger bytes enter `main`; once that exact
+root is advertised, the content commit may receive receipts in a subsequent
+commit. A release tag can add an immutable anchor, but it never replaces or
+mutates receipt bytes. This prepared tree contains no accepted receipts from the
+superseded repository history.
 The receipt binds:
 
 - data-owner repository and revision;

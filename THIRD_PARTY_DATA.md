@@ -26,3 +26,4 @@ The motif artifacts are deterministic project-generated representations of
 the named source matrices. Repository-revision receipts are intentionally
 absent from the clean-room initial commit. They must be regenerated only after
 the new canonical remote advertises the exact commit containing these bytes.
+No retained bundle currently has an accepted owner receipt.
