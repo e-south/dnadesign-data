@@ -42,6 +42,7 @@ def replay_source_conversion(
             source_motif_id=selection["source_motif_id"],
             source_descriptor_id=descriptor.source_id,
             prior_weight=selection["prior_weight"],
+            background=selection.get("target_background"),
             model_schema=artifact["schema_version"],
             data_root=data_root,
         )

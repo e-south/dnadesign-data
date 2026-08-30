@@ -15,7 +15,7 @@ navigation:
 
 | Provider ID | Input | Output | Important boundary |
 | --- | --- | --- | --- |
-| `meme_probability_matrix_v1` | One explicitly named MEME probability matrix | `motif-model/v2` | Zero values require the separately versioned 0.1 background mixture. |
+| `meme_probability_matrix_v1` | One explicitly named MEME probability matrix | `motif-model/v2` | Zero values require the separately versioned 0.1 background mixture. The source background is the default; an explicit target background is provenance-bound when requested. |
 | `jaspar_count_matrix_v1` | One explicitly named JASPAR count matrix | `motif-model/v2` | Uses the per-position background-weighted `sqrt(N_i)` count prior. |
 | `regulondb_tf_riset_sites_v1` | Release-pinned RegulonDB TF-RISet table | `dnadesign-data.binding-site-set/v1` | Does not infer alignment, site window, or PWM. |
 
@@ -66,6 +66,12 @@ The Python facade exposes the same bounded capability catalog as
   to an advertised `dnadesign-data` converter revision.
 - `regulondb_13_tf_riset_sites` describes the release-13 TF-RISet site table.
   Its derived records remain `private_storage` under the current source terms.
+
+The shared MEME adapter accepts an optional explicit target background for a
+prospectively uniform study contract. This is not a new provider: the same
+parser retains the source-declared background while using the target
+background for the prior mixture and emitted model. Both values and the policy
+are replayed during receipt validation.
 
 ## Other Common Shapes
 

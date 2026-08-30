@@ -49,6 +49,12 @@ remain readable but are not rewritten. A binding-site set requires an explicit,
 study-owned alignment or site window policy before it can become a probability
 model.
 
+`export-meme` uses the source-declared MEME background by default. Use
+`--background 0.25,0.25,0.25,0.25` only when a downstream protocol has
+prospectively chosen a uniform target background. The export keeps the source
+background as provenance and binds the target background separately; it does
+not rewrite or conceal what the source declared.
+
 ## Distribution Boundary
 
 The Python wheel provides contracts and deterministic conversion code. Source

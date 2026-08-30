@@ -53,6 +53,13 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     meme.add_argument("--source-motif-id", required=True)
     _add_source_identity_arguments(meme)
     meme.add_argument("--prior-weight", required=True, type=float)
+    meme.add_argument(
+        "--background",
+        help=(
+            "Optional comma-separated target A,C,G,T background probabilities; "
+            "the source-declared MEME background remains bound as provenance."
+        ),
+    )
     meme.add_argument("--out", required=True, type=Path)
     _add_output_arguments(meme)
 
@@ -127,6 +134,11 @@ def main(argv: Sequence[str] | None = None) -> int:
                 source_motif_id=args.source_motif_id,
                 source_descriptor_id=args.source_descriptor_id,
                 prior_weight=args.prior_weight,
+                background=(
+                    _parse_background_argument(args.background)
+                    if args.background is not None
+                    else None
+                ),
                 data_root=args.data_root,
             )
             output = write_motif_source_export(export, args.out)

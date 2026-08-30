@@ -57,7 +57,7 @@ contracts, provenance files, and credential boundary.
 | Entrypoint | Purpose |
 | --- | --- |
 | `dnadesign-data-motifs providers` | List implemented source shapes and output capabilities. |
-| `dnadesign-data-motifs export-meme` | Export one explicit MEME matrix as `motif-model/v1`. |
+| `dnadesign-data-motifs export-meme` | Export one explicit MEME matrix as `motif-model/v2`; optional `--background` binds a target scoring and regularization background while preserving the source declaration. |
 | `dnadesign-data-motifs export-regulondb-sites` | Preserve one regulator's TF-RISet evidence as `binding-site-set/v1`. |
 | `dnadesign-data-motifs receipt` | Bind a model and catalog source to byte-verified blobs at a publicly advertised owner Git revision; Storage fails closed. |
 
