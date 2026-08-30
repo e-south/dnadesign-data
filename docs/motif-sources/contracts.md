@@ -86,9 +86,11 @@ separately:
 Receipt validation replays the source conversion with the recorded target
 background and rejects disagreement with either background. Omitting the
 override retains the historical manifest, conversion, artifact, and receipt
-bytes; existing receipts require no migration. Supplying an override creates a
-new model identity and therefore requires a new export and receipt rather than
-reinterpreting an existing model.
+bytes; existing receipts require no migration. Supplying an override always
+creates a new canonical artifact identity and therefore requires a new export
+and receipt rather than reinterpreting an existing artifact. Its mathematical
+model digest also changes unless the explicit target equals the source
+background.
 
 JASPAR count matrices use `count_matrix_sqrt_n_background_prior_v1`. At each
 position `i`, let `N_i` be the observed row total and let `q_b` be the declared
