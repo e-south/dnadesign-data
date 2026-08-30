@@ -153,6 +153,26 @@ def test_full_tree_rejects_forbidden_payload_outside_data_shelves(
     assert any("forbidden private source payload name" in error for error in errors)
 
 
+@pytest.mark.parametrize(
+    "relative_path", ["docs/private-source.tsv", "docs/source-payload.parquet"]
+)
+def test_full_tree_rejects_neutral_data_payload_outside_closed_inventory(
+    tmp_path: Path, relative_path: str
+) -> None:
+    payload = tmp_path / relative_path
+    payload.parent.mkdir(parents=True)
+    payload.write_text("record\tvalue\nexample\t1\n", encoding="utf-8")
+    _init_repository(tmp_path)
+    subprocess.run(["git", "add", relative_path], cwd=tmp_path, check=True)
+
+    errors = check_public_tree(tmp_path)
+
+    assert any(
+        "data-like tracked file is outside the closed public inventory" in error
+        for error in errors
+    )
+
+
 def test_full_tree_rejects_forbidden_payload_content_outside_data_shelves(
     tmp_path: Path,
 ) -> None:

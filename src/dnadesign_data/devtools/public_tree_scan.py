@@ -31,6 +31,8 @@ _FORBIDDEN_PAYLOAD_TOKENS = (
     "omalley",
     "regulondb",
 )
+# Code, documentation, and repository configuration (.py/.md/.toml/.yaml/.yml)
+# remain valid outside data shelves; their bytes are still scanned below.
 _PAYLOAD_SUFFIXES = {
     ".csv",
     ".fa",
@@ -45,6 +47,11 @@ _PAYLOAD_SUFFIXES = {
     ".xlsx",
     ".zip",
 }
+_INVENTORIED_DATA_PATH = PurePosixPath("PUBLIC_DATA_INVENTORY.json")
+_INVENTORIED_DATA_PREFIXES = (
+    PurePosixPath("sources"),
+    PurePosixPath("generated/motif_models"),
+)
 _FORBIDDEN_POSTURE = re.compile(
     rb"(?i)redistribution[_ -]?status[\"']?\s*(?::|=|\t|,)\s*[\"']?"
     rb"(?:private_storage|review_blocked|review_required|legacy_unclassified|unclassified)"
@@ -187,6 +194,14 @@ def scan_tracked_tree(root: Path, *, max_file_bytes: int) -> list[str]:
             errors.append(str(exc))
             continue
         suffix = relative.suffix.lower()
+        is_inventoried_data_path = relative == _INVENTORIED_DATA_PATH or any(
+            relative == prefix or relative.is_relative_to(prefix)
+            for prefix in _INVENTORIED_DATA_PREFIXES
+        )
+        if suffix in _PAYLOAD_SUFFIXES and not is_inventoried_data_path:
+            errors.append(
+                f"{label}: data-like tracked file is outside the closed public inventory"
+            )
         if suffix in _PAYLOAD_SUFFIXES and any(
             token in label.lower() for token in _FORBIDDEN_PAYLOAD_TOKENS
         ):
