@@ -46,7 +46,7 @@ _PAYLOAD_SUFFIXES = {
     ".zip",
 }
 _FORBIDDEN_POSTURE = re.compile(
-    rb"(?i)(?:redistribution[_ -]?status\s*[:=\t,]\s*)"
+    rb"(?i)redistribution[_ -]?status[\"']?\s*(?::|=|\t|,)\s*[\"']?"
     rb"(?:private_storage|review_blocked|review_required|legacy_unclassified|unclassified)"
 )
 _IGNORED_WALK_NAMES = {

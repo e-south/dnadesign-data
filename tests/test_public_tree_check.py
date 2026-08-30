@@ -7,6 +7,8 @@ import subprocess
 import zipfile
 from pathlib import Path
 
+import pytest
+
 from dnadesign_data.devtools.public_tree_check import (
     build_public_data_inventory,
     check_public_tree,
@@ -157,6 +159,29 @@ def test_full_tree_rejects_forbidden_payload_content_outside_data_shelves(
     payload = tmp_path / "docs/source-review.tsv"
     payload.parent.mkdir(parents=True)
     payload.write_text("redistribution_status\tprivate_storage\n", encoding="utf-8")
+
+    errors = check_public_tree(tmp_path)
+
+    assert any(
+        "forbidden nonpublic redistribution posture" in error for error in errors
+    )
+
+
+@pytest.mark.parametrize("posture", ["private_storage", "review_blocked"])
+def test_full_tree_rejects_nonpublic_posture_in_canonical_json(
+    tmp_path: Path, posture: str
+) -> None:
+    payload = tmp_path / "docs/source-review.json"
+    payload.parent.mkdir(parents=True)
+    payload.write_text(
+        json.dumps(
+            {"redistribution_status": posture, "records": ["ACTG"]},
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        + "\n",
+        encoding="utf-8",
+    )
 
     errors = check_public_tree(tmp_path)
 
