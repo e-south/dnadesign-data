@@ -72,6 +72,26 @@ That transformation is recorded as
 This contract admits exactly the declared 0.1 mixture for current probability
 exports. It is distinct from count conversion.
 
+By default, the MEME source-declared background is used both for that mixture
+and as the model's scoring background. A caller that needs one prospectively
+declared study background may pass `background` through the Python API or
+`--background A,C,G,T` through `export-meme`. The resulting
+`probability_matrix_target_background_v1` conversion binds all three facts
+separately:
+
+- the background parsed from the source MEME bytes;
+- the explicit target background used for regularization and scoring;
+- the `explicit_target_background_v1` selection policy.
+
+Receipt validation replays the source conversion with the recorded target
+background and rejects disagreement with either background. Omitting the
+override retains the historical manifest, conversion, artifact, and receipt
+bytes; existing receipts require no migration. Supplying an override always
+creates a new canonical artifact identity and therefore requires a new export
+and receipt rather than reinterpreting an existing artifact. Its mathematical
+model digest also changes unless the explicit target equals the source
+background.
+
 JASPAR count matrices use `count_matrix_sqrt_n_background_prior_v1`. At each
 position `i`, let `N_i` be the observed row total and let `q_b` be the declared
 background. The position prior mass is `alpha_i = sqrt(N_i)`, base `b` receives

@@ -115,6 +115,63 @@ letter-probability matrix: alength= 4 w= 1 nsites= 1 E= 0
     assert not receipt_path.exists()
 
 
+def test_export_meme_cli_accepts_an_explicit_target_background(tmp_path: Path) -> None:
+    source = (
+        tmp_path / "sources/literature/OMalley_et_al/escherichia_coli_motifs/simple.txt"
+    )
+    source.parent.mkdir(parents=True)
+    source.write_text(
+        """MEME version 5
+ALPHABET= ACGT
+Background letter frequencies
+A 0.40 C 0.10 G 0.20 T 0.30
+MOTIF simple
+letter-probability matrix: alength= 4 w= 1 nsites= 1 E= 0
+1.0 0.0 0.0 0.0
+""",
+        encoding="utf-8",
+    )
+    output = tmp_path / "model-export"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "dnadesign_data.motifs.cli",
+            "export-meme",
+            str(source),
+            "--motif-id",
+            "simple",
+            "--source-motif-id",
+            "simple",
+            "--source-descriptor-id",
+            "omalley_2021_ecoli_meme",
+            "--data-root",
+            str(tmp_path),
+            "--prior-weight",
+            "0.1",
+            "--background",
+            "0.25,0.25,0.25,0.25",
+            "--out",
+            str(output),
+            "--indent",
+            "0",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+
+    assert json.loads(result.stdout)["output_schema"] == "motif-model/v2"
+    artifact = json.loads((output / "artifact.json").read_text())
+    manifest = json.loads((output / "manifest.json").read_text())
+    assert artifact["background"] == [0.25, 0.25, 0.25, 0.25]
+    assert artifact["conversion"]["source_background"] == [0.4, 0.1, 0.2, 0.3]
+    assert manifest["selection"]["target_background_policy"] == (
+        "explicit_target_background_v1"
+    )
+
+
 def test_export_cli_returns_structured_contract_error(tmp_path: Path) -> None:
     missing = (
         tmp_path

@@ -79,8 +79,9 @@ development panel are explicitly exposed.
 The new count-derived request now reports `qualification_ready`: its receipts
 bind source and model bytes at the advertised clean-room revision. This remains
 only a data-authority state; prospective study chronology is frozen by Research
-Studies. RegulonDB remains a private site-set route, and review-blocked O'Malley
-bytes are not used to fill that gap.
+Studies. RegulonDB remains a private site-set route. O'Malley source reports and
+derived models remain in accepted private Storage and are never published in
+this repository.
 
 Database payload publication is independently gated by release-local rights and
 attribution records. Generated motif bundles must resolve to a redistributable

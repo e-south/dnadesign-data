@@ -40,6 +40,11 @@ from dnadesign_data.motifs.io import (
     MAX_JSON_BYTES,
     load_motif_source_export_for_receipt,
 )
+from dnadesign_data.motifs.meme import (
+    TARGET_BACKGROUND_CONVERSION_KEYS,
+    TARGET_BACKGROUND_SELECTION_KEYS,
+    validate_target_background_provenance,
+)
 from dnadesign_data.motifs.receipt_validation import (
     REVISION_PATTERN,
     validate_artifact_ref,
@@ -148,11 +153,12 @@ def _validate_model_export(
     artifact = _require_exact_keys(root["artifact"], _MODEL_KEYS, label="motif-model")
     source = _require_exact_keys(manifest["source"], _SOURCE_KEYS, label="source")
     provider_id = manifest.get("provider_id")
-    selection_keys = (
-        _COUNT_SELECTION_KEYS
-        if provider_id == "jaspar_count_matrix_v1"
-        else _PROBABILITY_SELECTION_KEYS
-    )
+    raw_selection = manifest["selection"]
+    selection_keys = _PROBABILITY_SELECTION_KEYS
+    if provider_id == "jaspar_count_matrix_v1":
+        selection_keys = _COUNT_SELECTION_KEYS
+    elif isinstance(raw_selection, dict) and "target_background" in raw_selection:
+        selection_keys = TARGET_BACKGROUND_SELECTION_KEYS
     selection = _require_exact_keys(
         manifest["selection"], selection_keys, label="selection"
     )
@@ -234,24 +240,22 @@ def _validate_model_export(
             raise MotifExportError("count-matrix exports require conversion provenance")
         conversion_contract = "direct_probability_model_v1"
     else:
-        conversion_keys = (
-            _COUNT_CONVERSION_KEYS
-            if provider_id == "jaspar_count_matrix_v1"
-            else _PROBABILITY_CONVERSION_KEYS
-        )
+        conversion_keys = _PROBABILITY_CONVERSION_KEYS
+        if provider_id == "jaspar_count_matrix_v1":
+            conversion_keys = _COUNT_CONVERSION_KEYS
+        elif "target_background" in selection:
+            conversion_keys = TARGET_BACKGROUND_CONVERSION_KEYS
         conversion = _require_exact_keys(
             conversion, conversion_keys, label="conversion"
         )
-        expected_method = (
-            "count_matrix_sqrt_n_background_prior_v1"
-            if provider_id == "jaspar_count_matrix_v1"
-            else "probability_matrix_prior_mixture_v1"
-        )
-        expected_conversion_schema = (
-            "motif-conversion/v2"
-            if provider_id == "jaspar_count_matrix_v1"
-            else "motif-conversion/v1"
-        )
+        expected_method = "probability_matrix_prior_mixture_v1"
+        expected_conversion_schema = "motif-conversion/v1"
+        if provider_id == "jaspar_count_matrix_v1":
+            expected_method = "count_matrix_sqrt_n_background_prior_v1"
+            expected_conversion_schema = "motif-conversion/v2"
+        elif "target_background" in selection:
+            expected_method = "probability_matrix_target_background_v1"
+            expected_conversion_schema = "motif-conversion/v2"
         if (
             conversion["schema_version"] != expected_conversion_schema
             or conversion["method"] != expected_method
@@ -323,6 +327,11 @@ def _validate_model_export(
                     "count-matrix sqrt(N) prior provenance is malformed"
                 )
             conversion_contract = "count_matrix_sqrt_n_background_prior_v1"
+        elif "target_background" in selection:
+            validate_target_background_provenance(
+                selection, conversion, model_background=background
+            )
+            conversion_contract = "probability_matrix_target_background_v1"
         else:
             prior_weight = _require_number(
                 selection["prior_weight"], label="selection prior_weight"

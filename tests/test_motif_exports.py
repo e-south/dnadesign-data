@@ -487,6 +487,181 @@ letter-probability matrix: alength= 4 w= 2 nsites= 4 E= 0
     assert first["manifest"]["model_digest"]
 
 
+def test_meme_export_can_use_an_explicit_target_background_without_losing_source_background(
+    tmp_path: Path,
+) -> None:
+    source = _write_catalog_meme(
+        tmp_path,
+        "target-background.txt",
+        """MEME version 5
+ALPHABET= ACGT
+Background letter frequencies
+A 0.40 C 0.10 G 0.20 T 0.30
+MOTIF source_model
+letter-probability matrix: alength= 4 w= 1 nsites= 4 E= 0
+1.0 0.0 0.0 0.0
+""",
+    )
+
+    export = build_meme_motif_export(
+        source,
+        motif_id="model",
+        source_motif_id="source_model",
+        source_descriptor_id="omalley_2021_ecoli_meme",
+        prior_weight=0.1,
+        background=[0.25, 0.25, 0.25, 0.25],
+        data_root=tmp_path,
+    )
+
+    assert export["artifact"]["background"] == [0.25, 0.25, 0.25, 0.25]
+    assert export["artifact"]["probabilities"][0] == pytest.approx(
+        [1.025 / 1.1, 0.025 / 1.1, 0.025 / 1.1, 0.025 / 1.1]
+    )
+    assert export["artifact"]["conversion"] == {
+        "schema_version": "motif-conversion/v2",
+        "method": "probability_matrix_target_background_v1",
+        "prior_weight": 0.1,
+        "source_motif_id": "source_model",
+        "source_background": [0.4, 0.1, 0.2, 0.3],
+        "target_background": [0.25, 0.25, 0.25, 0.25],
+        "target_background_policy": "explicit_target_background_v1",
+    }
+    assert (
+        export["manifest"]["artifact_sha256"]
+        == (
+            "70221c54654e9fa9abb2d9ac059d7b1d7479656a7b0667fe1d21fc39823fd0d2"  # pragma: allowlist secret
+        )
+    )
+    assert (
+        export["manifest"]["model_digest"]
+        == (
+            "18732248d736c816daae1040a02212478b00e93425b679ed9d7e3986babeebd2"  # pragma: allowlist secret
+        )
+    )
+    assert export["manifest"]["selection"] == {
+        "motif_id": "model",
+        "source_motif_id": "source_model",
+        "prior_weight": 0.1,
+        "source_background": [0.4, 0.1, 0.2, 0.3],
+        "target_background": [0.25, 0.25, 0.25, 0.25],
+        "target_background_policy": "explicit_target_background_v1",
+    }
+
+
+def test_meme_target_background_source_replay_rejects_provenance_tampering(
+    tmp_path: Path,
+) -> None:
+    source = _write_catalog_meme(
+        tmp_path,
+        "target-background.txt",
+        """MEME version 5
+ALPHABET= ACGT
+Background letter frequencies
+A 0.40 C 0.10 G 0.20 T 0.30
+MOTIF source_model
+letter-probability matrix: alength= 4 w= 1 nsites= 4 E= 0
+0.7 0.1 0.1 0.1
+""",
+    )
+    export = build_meme_motif_export(
+        source,
+        motif_id="model",
+        source_motif_id="source_model",
+        source_descriptor_id="omalley_2021_ecoli_meme",
+        prior_weight=0.1,
+        background=[0.25, 0.25, 0.25, 0.25],
+        data_root=tmp_path,
+    )
+    bundle = _receipt_bundle(tmp_path, export)
+    assert (
+        receipt_module.validate_motif_export_source_replay(bundle, data_root=tmp_path)
+        == export
+    )
+
+    tampered = copy.deepcopy(export)
+    tampered["artifact"]["conversion"]["source_background"] = [
+        0.25,
+        0.25,
+        0.25,
+        0.25,
+    ]
+    tampered["manifest"]["selection"]["source_background"] = [
+        0.25,
+        0.25,
+        0.25,
+        0.25,
+    ]
+    tampered["manifest"]["artifact_sha256"] = hashlib.sha256(
+        canonical_json_bytes(tampered["artifact"])
+    ).hexdigest()
+    bundle = _receipt_bundle(tmp_path / "tampered", tampered)
+
+    with pytest.raises(MotifExportError, match="source conversion replay"):
+        receipt_module.validate_motif_export_source_replay(bundle, data_root=tmp_path)
+
+
+def test_meme_target_background_receipt_replays_the_explicit_policy(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source = _write_catalog_meme(
+        tmp_path,
+        "target-background.txt",
+        """MEME version 5
+ALPHABET= ACGT
+Background letter frequencies
+A 0.40 C 0.10 G 0.20 T 0.30
+MOTIF source_model
+letter-probability matrix: alength= 4 w= 1 nsites= 4 E= 0
+0.7 0.1 0.1 0.1
+""",
+    )
+    export = build_meme_motif_export(
+        source,
+        motif_id="model",
+        source_motif_id="source_model",
+        source_descriptor_id="omalley_2021_ecoli_meme",
+        prior_weight=0.1,
+        background=[0.25, 0.25, 0.25, 0.25],
+        data_root=tmp_path,
+    )
+    descriptor = next(
+        item
+        for item in known_motif_source_files()
+        if item.source_id == "omalley_2021_ecoli_meme"
+    )
+    accepted_descriptor = replace(descriptor, redistribution_status="redistributable")
+    monkeypatch.setattr(
+        receipt_module, "known_motif_source_files", lambda: (accepted_descriptor,)
+    )
+    export["manifest"]["source"]["redistribution_status"] = "redistributable"
+    bundle = _receipt_bundle(tmp_path, export)
+    repository, owner_revision, artifact_ref = _git_authority(tmp_path, export)
+    monkeypatch.setattr(
+        receipt_module,
+        "_query_canonical_remote_revisions",
+        lambda: frozenset({owner_revision}),
+    )
+
+    receipt = build_motif_export_receipt(
+        bundle,
+        owner_revision=owner_revision,
+        canonical_artifact_ref=artifact_ref,
+        owner_repository_path=repository,
+        data_root=tmp_path,
+    )
+
+    assert receipt["conversion_contract"] == ("probability_matrix_target_background_v1")
+    assert (
+        revalidate_motif_export_receipt(
+            bundle,
+            receipt,
+            owner_repository_path=repository,
+            data_root=tmp_path,
+        )
+        == receipt
+    )
+
+
 def test_meme_export_fails_without_explicit_prior_for_zero_values(
     tmp_path: Path,
 ) -> None:
