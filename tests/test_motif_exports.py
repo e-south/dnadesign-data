@@ -526,11 +526,17 @@ letter-probability matrix: alength= 4 w= 1 nsites= 4 E= 0
         "target_background": [0.25, 0.25, 0.25, 0.25],
         "target_background_policy": "explicit_target_background_v1",
     }
-    assert export["manifest"]["artifact_sha256"] == (
-        "70221c54654e9fa9abb2d9ac059d7b1d7479656a7b0667fe1d21fc39823fd0d2"
+    assert (
+        export["manifest"]["artifact_sha256"]
+        == (
+            "70221c54654e9fa9abb2d9ac059d7b1d7479656a7b0667fe1d21fc39823fd0d2"  # pragma: allowlist secret
+        )
     )
-    assert export["manifest"]["model_digest"] == (
-        "18732248d736c816daae1040a02212478b00e93425b679ed9d7e3986babeebd2"
+    assert (
+        export["manifest"]["model_digest"]
+        == (
+            "18732248d736c816daae1040a02212478b00e93425b679ed9d7e3986babeebd2"  # pragma: allowlist secret
+        )
     )
     assert export["manifest"]["selection"] == {
         "motif_id": "model",
