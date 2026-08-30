@@ -12,6 +12,7 @@ uv run python -m dnadesign_data.devtools.publication_check
 uv run python -m dnadesign_data.devtools.public_tree_check
 uv lock --check
 uv build
+uv run python -m dnadesign_data.devtools.package_artifact_check
 git diff --check
 ```
 
@@ -54,6 +55,7 @@ The GitHub Actions workflow mirrors the local checks:
 - CLI smoke for public data adapters and the source catalog list/schema/check
   surface;
 - package build smoke on Python 3.12.
+- exact wheel/sdist inventory and package privacy inspection.
 
 ## Public release bootstrap
 

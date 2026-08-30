@@ -83,3 +83,5 @@ jobs:
         run: uv lock --check
       - name: Build package
         run: uv build
+      - name: Inspect package artifacts
+        run: uv run python -m dnadesign_data.devtools.package_artifact_check
