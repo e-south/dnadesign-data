@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 
 import dnadesign_data.motifs.pool as pool_module
+import dnadesign_data.motifs.receipts as receipt_module
 from dnadesign_data.motifs.contracts import (
     MotifExportError,
     canonical_json_bytes,
@@ -19,13 +20,23 @@ from dnadesign_data.motifs.pool import build_task_model_pool
 
 
 @pytest.fixture(autouse=True)
-def _withhold_unpublished_cleanroom_authority(
+def _advertise_checked_receipt_authority(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    revisions = {
+        json.loads(path.read_text(encoding="utf-8"))["owner_revision"]
+        for path in Path("generated/motif_models").glob("*/*/receipt.json")
+    }
+    assert len(revisions) == 1
     monkeypatch.setattr(
         pool_module,
         "_query_canonical_remote_revisions",
-        frozenset,
+        lambda: frozenset(revisions),
+    )
+    monkeypatch.setattr(
+        receipt_module,
+        "_query_canonical_remote_revisions",
+        lambda: frozenset(revisions),
     )
 
 
@@ -53,13 +64,34 @@ def _request() -> dict[str, object]:
     }
 
 
-def test_formal_candidate_without_receipts_remains_pending_without_durable_freshness() -> (
-    None
-):
+def _copy_unreceipted_fresh_models(root: Path) -> None:
+    source_root = Path("sources/databases/jaspar/2026/CORE-counts")
+    target_source = root / source_root
+    target_source.mkdir(parents=True)
+    for name in ("MA0561.1.jaspar", "MA0931.2.jaspar"):
+        shutil.copy2(source_root / name, target_source / name)
+    ledger = Path("sources/motif-development/development-exposure-ledger.json")
+    target_ledger = root / ledger
+    target_ledger.parent.mkdir(parents=True)
+    shutil.copy2(ledger, target_ledger)
+    generated_root = Path("generated/motif_models/jaspar-2026-counts")
+    for motif_id in ("ABI5", "PIF4"):
+        shutil.copytree(
+            generated_root / motif_id,
+            root / generated_root / motif_id,
+            ignore=shutil.ignore_patterns("receipt.json"),
+        )
+
+
+def test_formal_candidate_without_receipts_remains_pending_without_durable_freshness(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    _copy_unreceipted_fresh_models(tmp_path)
+    monkeypatch.setattr(pool_module, "_query_canonical_remote_revisions", frozenset)
     request = _request()
 
-    first = build_task_model_pool(request, repository_root=Path.cwd())
-    second = build_task_model_pool(request, repository_root=Path.cwd())
+    first = build_task_model_pool(request, repository_root=tmp_path)
+    second = build_task_model_pool(request, repository_root=tmp_path)
 
     assert first == second
     assert first["schema_version"] == "dnadesign-data.motif-task-pool/v1"
@@ -92,10 +124,29 @@ def test_formal_candidate_without_receipts_remains_pending_without_durable_fresh
 
 
 def test_advertised_unreceipted_cleanroom_models_remain_qualification_pending(
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    _copy_unreceipted_fresh_models(tmp_path)
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    subprocess.run(["git", "-C", str(tmp_path), "add", "."], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(tmp_path),
+            "-c",
+            "user.name=Pool Test",
+            "-c",
+            "user.email=pool@example.invalid",
+            "commit",
+            "-qm",
+            "unreceipted authority",
+        ],
+        check=True,
+    )
     revision = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
+        ["git", "-C", str(tmp_path), "rev-parse", "HEAD"],
         check=True,
         capture_output=True,
         text=True,
@@ -106,7 +157,7 @@ def test_advertised_unreceipted_cleanroom_models_remain_qualification_pending(
         lambda: frozenset({revision}),
     )
 
-    pool = build_task_model_pool(_request(), repository_root=Path.cwd())
+    pool = build_task_model_pool(_request(), repository_root=tmp_path)
 
     assert pool["freshness_authority"] == "durable_git"
     assert pool["admission_status"] == "qualification_pending"
@@ -411,10 +462,10 @@ def test_checked_in_pool_inventories_cover_only_active_v2_surfaces() -> None:
         Path("generated/motif_models/pools/formal-fresh-v2.inventory.json").read_text()
     )
     assert pool == formal_inventory
-    assert pool["admission_status"] == "qualification_pending"
-    assert pool["freshness_authority"] == "local_untrusted"
+    assert pool["admission_status"] == "qualification_ready"
+    assert pool["freshness_authority"] == "durable_git"
     assert {item["qualification"] for item in pool["models"]} == {
-        "conversion_verified_pending_receipt"
+        "accepted_owner_receipt"
     }
 
 

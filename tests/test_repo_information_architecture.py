@@ -174,9 +174,10 @@ def test_ci_uses_uv_cache_precommit_and_docs_checks() -> None:
     assert "uv run dnadesign-data-sources list --kind all --indent 0" in workflow
     assert "uv run dnadesign-data-sources schema --indent 0" in workflow
     assert (
-        "uv run dnadesign-data-sources check --require-source "
-        "regulondb_13_tf_riset --summary-only --indent 0"
+        "uv run dnadesign-data-sources resolve regulondb_13_tf_riset "
+        "--allow-missing --indent 0"
     ) in workflow
+    assert "--require-source regulondb_13_tf_riset" not in workflow
     assert "uv build" in workflow
 
 
