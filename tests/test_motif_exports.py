@@ -27,6 +27,7 @@ from dnadesign_data.motifs import (
 )
 from dnadesign_data.motifs.contracts import (
     canonical_json_bytes,
+    model_digest,
     read_source_bytes,
     validate_probability_rows,
 )
@@ -548,6 +549,38 @@ letter-probability matrix: alength= 4 w= 1 nsites= 4 E= 0
     }
 
 
+@pytest.mark.parametrize("prior_weight", [0.0, -0.1])
+def test_meme_target_background_requires_positive_prior_weight(
+    tmp_path: Path, prior_weight: float
+) -> None:
+    source = _write_catalog_meme(
+        tmp_path,
+        "target-background.txt",
+        """MEME version 5
+ALPHABET= ACGT
+Background letter frequencies
+A 0.40 C 0.10 G 0.20 T 0.30
+MOTIF source_model
+letter-probability matrix: alength= 4 w= 1 nsites= 4 E= 0
+0.7 0.1 0.1 0.1
+""",
+    )
+
+    with pytest.raises(
+        MotifExportError,
+        match="explicit target-background conversion requires a positive prior_weight",
+    ):
+        build_meme_motif_export(
+            source,
+            motif_id="model",
+            source_motif_id="source_model",
+            source_descriptor_id="omalley_2021_ecoli_meme",
+            prior_weight=prior_weight,
+            background=[0.25, 0.25, 0.25, 0.25],
+            data_root=tmp_path,
+        )
+
+
 def test_meme_target_background_source_replay_rejects_provenance_tampering(
     tmp_path: Path,
 ) -> None:
@@ -597,6 +630,47 @@ letter-probability matrix: alength= 4 w= 1 nsites= 4 E= 0
     bundle = _receipt_bundle(tmp_path / "tampered", tampered)
 
     with pytest.raises(MotifExportError, match="source conversion replay"):
+        receipt_module.validate_motif_export_source_replay(bundle, data_root=tmp_path)
+
+
+@pytest.mark.parametrize("prior_weight", [0.0, -0.1])
+def test_meme_target_background_source_replay_rejects_nonpositive_prior_weight(
+    tmp_path: Path, prior_weight: float
+) -> None:
+    source = _write_catalog_meme(
+        tmp_path,
+        "target-background.txt",
+        """MEME version 5
+ALPHABET= ACGT
+Background letter frequencies
+A 0.40 C 0.10 G 0.20 T 0.30
+MOTIF source_model
+letter-probability matrix: alength= 4 w= 1 nsites= 4 E= 0
+0.7 0.1 0.1 0.1
+""",
+    )
+    export = build_meme_motif_export(
+        source,
+        motif_id="model",
+        source_motif_id="source_model",
+        source_descriptor_id="omalley_2021_ecoli_meme",
+        prior_weight=0.1,
+        background=[0.25, 0.25, 0.25, 0.25],
+        data_root=tmp_path,
+    )
+    export["artifact"]["probabilities"] = [[0.7, 0.1, 0.1, 0.1]]
+    export["artifact"]["conversion"]["prior_weight"] = prior_weight
+    export["manifest"]["selection"]["prior_weight"] = prior_weight
+    export["manifest"]["artifact_sha256"] = hashlib.sha256(
+        canonical_json_bytes(export["artifact"])
+    ).hexdigest()
+    export["manifest"]["model_digest"] = model_digest(export["artifact"])
+    bundle = _receipt_bundle(tmp_path, export)
+
+    with pytest.raises(
+        MotifExportError,
+        match="explicit target-background conversion requires a positive prior_weight",
+    ):
         receipt_module.validate_motif_export_source_replay(bundle, data_root=tmp_path)
 
 
