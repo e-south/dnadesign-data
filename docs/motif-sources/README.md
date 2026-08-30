@@ -11,10 +11,10 @@ navigation:
 
 # Motif Source Exports
 
-Use this surface when transcription-factor binding evidence must become an
-explicit input to Motif Balance. `dnadesign-data` owns the source record,
-selection provenance, and deterministic export. Motif Balance owns scoring and
-design from a canonical `MotifModel`.
+Use this surface when source-attested motif records must become an explicit
+input to Motif Balance. `dnadesign-data` owns the source record, selection
+provenance, and deterministic export. Motif Balance owns scoring and design
+from a canonical `MotifModel`.
 
 This is a bounded adapter set, not a universal adapter framework. A provider is
 registered only after its source shape, output schema, rights posture, and
