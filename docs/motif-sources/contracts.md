@@ -83,6 +83,11 @@ separately:
 - the explicit target background used for regularization and scoring;
 - the `explicit_target_background_v1` selection policy.
 
+This explicit conversion requires a positive `prior_weight`, even when every
+source probability is already positive. A zero prior remains valid only for
+the legacy no-override path, where it preserves the source matrix and its
+historical canonical bytes.
+
 Receipt validation replays the source conversion with the recorded target
 background and rejects disagreement with either background. Omitting the
 override retains the historical manifest, conversion, artifact, and receipt

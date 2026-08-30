@@ -58,6 +58,19 @@ TARGET_BACKGROUND_CONVERSION_KEYS = frozenset(
 )
 
 
+def _validate_target_background_prior(prior_weight: object) -> float:
+    if (
+        isinstance(prior_weight, bool)
+        or not isinstance(prior_weight, (int, float))
+        or not math.isfinite(prior_weight)
+        or prior_weight <= 0.0
+    ):
+        raise MotifExportError(
+            "explicit target-background conversion requires a positive prior_weight"
+        )
+    return float(prior_weight)
+
+
 def validate_target_background_provenance(
     selection: dict[str, Any],
     conversion: dict[str, Any],
@@ -86,14 +99,10 @@ def validate_target_background_provenance(
         raise MotifExportError(
             "explicit target-background provenance disagrees with the model"
         )
-    prior_weight = selection["prior_weight"]
+    prior_weight = _validate_target_background_prior(selection["prior_weight"])
     conversion_prior = conversion["prior_weight"]
     if (
-        isinstance(prior_weight, bool)
-        or not isinstance(prior_weight, (int, float))
-        or not math.isfinite(prior_weight)
-        or prior_weight < 0.0
-        or isinstance(conversion_prior, bool)
+        isinstance(conversion_prior, bool)
         or not isinstance(conversion_prior, (int, float))
         or not math.isfinite(conversion_prior)
         or conversion_prior != prior_weight
@@ -220,6 +229,8 @@ def build_meme_motif_export(
     if alphabet is None or alphabet.group(1) != "ACGT":
         raise MotifExportError("MEME source alphabet must be exactly ACGT")
     source_background = _parse_background(text)
+    if background is not None:
+        _validate_target_background_prior(prior_weight)
     target_background = (
         source_background if background is None else validate_background(background)
     )
