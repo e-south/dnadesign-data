@@ -28,7 +28,7 @@ def test_provider_catalog_cli_is_machine_readable() -> None:
     assert payload["provider_count"] == 3
 
 
-def test_export_meme_cli_uses_catalog_authority_and_receipt_blocks_unresolved_rights(
+def test_export_meme_cli_uses_catalog_authority_and_storage_receipt_requires_advertised_revision(
     tmp_path: Path,
 ) -> None:
     source = (
@@ -111,7 +111,7 @@ letter-probability matrix: alength= 4 w= 1 nsites= 1 E= 0
     assert receipt_result.stdout == ""
     receipt_payload = json.loads(receipt_result.stderr)
     assert receipt_payload["report_kind"] == "motif_source_error"
-    assert "resolved redistributable or private_storage" in receipt_payload["message"]
+    assert "Storage owner_revision is not advertised" in receipt_payload["message"]
     assert not receipt_path.exists()
 
 

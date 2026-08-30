@@ -138,7 +138,7 @@ def test_motif_source_descriptors_distinguish_models_from_site_evidence() -> Non
     assert isinstance(omalley, MotifSourceFile)
     assert omalley.source_kind == "probability_matrix_collection"
     assert omalley.output_capability == "motif-model/v2"
-    assert omalley.redistribution_status == "review_blocked"
+    assert omalley.redistribution_status == "private_storage"
 
     jaspar = sources["jaspar_2026_core_meme"]
     assert jaspar.source == "jaspar"

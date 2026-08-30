@@ -445,7 +445,7 @@ def build_motif_export_receipt(
     owner_repository_path: str | Path,
     data_root: str | Path,
 ) -> dict[str, object]:
-    """Verify and bind one canonical bundle to an existing Git authority."""
+    """Verify and bind one canonical bundle to Git or private Storage authority."""
 
     if REVISION_PATTERN.fullmatch(owner_revision) is None:
         raise MotifExportError("owner_revision must be a 40-character Git revision")
@@ -475,21 +475,36 @@ def build_motif_export_receipt(
         raise MotifExportError(
             "private_storage inputs require a Storage artifact reference"
         )
+    integration_anchors = _query_canonical_remote_revisions()
     if ref_kind == "storage":
-        raise MotifExportError(
-            "Storage artifact references require a stable explicit verifier; none is configured"
+        if owner_revision not in integration_anchors:
+            raise MotifExportError(
+                "Storage owner_revision is not advertised by canonical main or a release tag"
+            )
+        from dnadesign_data.motifs.storage_authority import (
+            verify_private_motif_storage_authority,
         )
-    verify_git_authority(
-        owner_repository_path,
-        owner_revision=owner_revision,
-        integration_anchors=_query_canonical_remote_revisions(),
-        ref_path=ref_path,
-        artifact_bytes=artifact_bytes,
-        artifact_max_bytes=MAX_JSON_BYTES,
-        source_ref_path=source_ref_path,
-        source_bytes=source_bytes,
-        source_max_bytes=MAX_SOURCE_BYTES,
-    )
+
+        verify_private_motif_storage_authority(
+            data_root,
+            canonical_artifact_ref=canonical_artifact_ref,
+            owner_revision=owner_revision,
+            source_relative_path=source_ref_path,
+            source_bytes=source_bytes,
+            artifact_bytes=artifact_bytes,
+        )
+    else:
+        verify_git_authority(
+            owner_repository_path,
+            owner_revision=owner_revision,
+            integration_anchors=integration_anchors,
+            ref_path=ref_path,
+            artifact_bytes=artifact_bytes,
+            artifact_max_bytes=MAX_JSON_BYTES,
+            source_ref_path=source_ref_path,
+            source_bytes=source_bytes,
+            source_max_bytes=MAX_SOURCE_BYTES,
+        )
     artifact_digest = sha256_bytes(artifact_bytes)
     required_strings = {
         "motif_id": artifact["motif_id"],

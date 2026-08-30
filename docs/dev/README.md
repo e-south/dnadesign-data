@@ -59,7 +59,7 @@ The GitHub Actions workflow mirrors the local checks:
 
 ## Public release bootstrap
 
-The intended next data release is `v0.1.0a2`, matching the project version.
+The intended next data release is `v0.1.0a3`, matching the project version.
 The tag gate requires a clean tag at `HEAD` and exactly one rooted public
 history. The first push may have an all-zero GitHub `before` SHA; the
 publication check treats that event as a diff from Git's empty tree.
@@ -75,4 +75,4 @@ only the intended release tag after verifying the canonical public branch. This
 no-local/no-extra-tags clone is required because a copied `.git` directory can
 retain unreachable objects from superseded private history even when the
 visible branch has one root. Run the full checks and
-`dnadesign-data-public-tree --require-tag v0.1.0a2` in that clone.
+`dnadesign-data-public-tree --require-tag v0.1.0a3` in that clone.

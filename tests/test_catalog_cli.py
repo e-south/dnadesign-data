@@ -128,7 +128,7 @@ def test_source_catalog_lists_motif_source_capabilities(tmp_path: Path) -> None:
     record = payload["records"][0]
     assert record["source_id"] == "omalley_2021_ecoli_meme"
     assert record["output_capability"] == "motif-model/v2"
-    assert record["redistribution_status"] == "review_blocked"
+    assert record["redistribution_status"] == "private_storage"
 
 
 def test_source_catalog_resolve_fails_fast_on_missing_source(tmp_path: Path) -> None:
