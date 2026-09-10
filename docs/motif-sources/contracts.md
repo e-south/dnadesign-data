@@ -98,7 +98,7 @@ model digest also changes unless the explicit target equals the source
 background.
 
 JASPAR count matrices use `count_matrix_sqrt_n_background_prior_v1`. At each
-position `i`, let `N_i` be the observed row total and let `q_b` be the declared
+position `i`, let `N_i` be the supplied A/C/G/T weight total and let `q_b` be the declared
 background. The position prior mass is `alpha_i = sqrt(N_i)`, base `b` receives
 `alpha_i * q_b`, and the denominator is `N_i + alpha_i`. The Motif Balance
 handoff records `source_motif_id`, every `N_i`, every `alpha_i`, and every
@@ -110,6 +110,11 @@ cannot reinterpret one admitted source. It does not describe the count prior as
 one scalar probability mixture. Negative, nonfinite, missing, unequal-width,
 overflowing, zero-total,
 and trailing source content fail before publication.
+
+This is an explicit count-format conversion policy, not a claim that every
+provider's weights count independent binding sites. In particular, PBM-derived
+PFMs can contain scaled weights. Their totals control this fixed prior but do
+not establish biological replication or an effective statistical sample size.
 
 ## Task-driven pools
 
