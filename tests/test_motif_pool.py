@@ -27,16 +27,24 @@ def _advertise_checked_receipt_authority(
         json.loads(path.read_text(encoding="utf-8"))["owner_revision"]
         for path in Path("generated/motif_models").glob("*/*/receipt.json")
     }
-    assert len(revisions) == 1
+    assert revisions
+    # Simulate one advertised integration tip, not one shared receipt revision.
+    anchor = subprocess.run(
+        ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
+    ).stdout.strip()
+    for revision in revisions:
+        subprocess.run(
+            ["git", "merge-base", "--is-ancestor", revision, anchor], check=True
+        )
     monkeypatch.setattr(
         pool_module,
         "_query_canonical_remote_revisions",
-        lambda: frozenset(revisions),
+        lambda: frozenset({anchor}),
     )
     monkeypatch.setattr(
         receipt_module,
         "_query_canonical_remote_revisions",
-        lambda: frozenset(revisions),
+        lambda: frozenset({anchor}),
     )
 
 
@@ -62,6 +70,30 @@ def _request() -> dict[str, object]:
             }
         ],
     }
+
+
+def test_formal_pool_accepts_receipts_from_successive_publications() -> None:
+    request = _request()
+    request["models"][1] = {
+        "motif_id": "ARF1",
+        "bundle_path": "generated/motif_models/jaspar-2026-counts/ARF1",  # pragma: allowlist secret
+    }
+    request["tasks"] = [{"task_id": "abi5_arf1", "motif_ids": ["ABI5", "ARF1"]}]
+    revisions = {
+        json.loads(Path(model["bundle_path"], "receipt.json").read_text())[
+            "owner_revision"
+        ]
+        for model in request["models"]
+    }
+    assert len(revisions) == 2
+
+    pool = build_task_model_pool(request, repository_root=Path.cwd())
+
+    assert pool["freshness_authority"] == "durable_git"
+    assert pool["admission_status"] == "qualification_ready"
+    assert all(
+        model["qualification"] == "accepted_owner_receipt" for model in pool["models"]
+    )
 
 
 def _copy_unreceipted_fresh_models(root: Path) -> None:
@@ -407,7 +439,9 @@ def test_development_pool_preserves_exposure_without_formal_admission() -> None:
     assert pool["tasks"][0]["development_exposure"] == "development_exposed"
 
 
-def test_checked_in_pool_inventories_cover_only_active_v2_surfaces() -> None:
+def test_checked_in_pool_inventories_cover_only_active_v2_surfaces(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     exposed_v2_request = json.loads(
         Path(
             "generated/motif_models/pools/development-exposed-v2.request.json"
@@ -457,10 +491,18 @@ def test_checked_in_pool_inventories_cover_only_active_v2_surfaces() -> None:
         if task["task_id"] == "human_core_twelve"
     )
     assert len(twelve["motif_ids"]) == 12
-    pool = build_task_model_pool(fresh_request, repository_root=Path.cwd())
     formal_inventory = json.loads(
         Path("generated/motif_models/pools/formal-fresh-v2.inventory.json").read_text()
     )
+    # Replay the historical inventory at its declared exposure authorities.
+    anchors = frozenset(
+        row["owner_revision"]
+        for row in formal_inventory["development_exposure_authorities"]
+    )
+    monkeypatch.setattr(
+        pool_module, "_query_canonical_remote_revisions", lambda: anchors
+    )
+    pool = build_task_model_pool(fresh_request, repository_root=Path.cwd())
     assert pool == formal_inventory
     assert pool["admission_status"] == "qualification_ready"
     assert pool["freshness_authority"] == "durable_git"
