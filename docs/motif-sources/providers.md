@@ -40,9 +40,10 @@ The Python facade exposes the same bounded capability catalog as
   records retrieved through the official matrix API: twelve human, fourteen
   *Arabidopsis thaliana*, and two *Drosophila melanogaster* records. The original
   sixteen converted models retain their accepted receipts unchanged. The twelve
-  Arabidopsis additions retrieved on 2026-09-09 have source files and deterministic
-  model exports, but **no accepted owner receipts yet**. Local conversion alone
-  does not qualify a downstream experiment.
+  Arabidopsis additions retrieved on 2026-09-09 now have accepted owner receipts
+  bound to the published source commit `d75561bd4af2101cec5a83b0c7697133f27fb2d7`.
+  Each receipt verifies source replay and exact model bytes against public Git
+  authority; it does not qualify a downstream experiment or scientific claim.
   The record ledger preserves IDs, taxa, assay labels, widths, mean supplied
   column totals, rights, URLs, digests, and intake exposure state. For the additions,
   matrix-generation PMID, validation PMIDs, and UniProt accession are separate
