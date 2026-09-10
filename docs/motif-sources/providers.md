@@ -36,13 +36,21 @@ The Python facade exposes the same bounded capability catalog as
   attribution and record links remain attached through the source descriptor
   and bytes. These clean-room models are deterministic and have accepted owner
   receipts bound to the advertised clean-room root.
-- `jaspar_2026_core_counts` describes 16 exact JASPAR CORE 2026 count records
-  retrieved through the official matrix API: twelve human, two *Arabidopsis
-  thaliana*, and two *Drosophila melanogaster* records. Their record ledger
-  preserves source IDs, taxa, assay labels, widths, mean observed counts,
-  rights posture, retrieval URLs, source digests, and development-exposure
-  state. Converted artifacts are deterministic and carry accepted receipts
-  bound to the publicly advertised clean-room root.
+- `jaspar_2026_core_counts` describes 28 exact JASPAR CORE 2026 count-format
+  records retrieved through the official matrix API: twelve human, fourteen
+  *Arabidopsis thaliana*, and two *Drosophila melanogaster* records. The original
+  sixteen converted models retain their accepted receipts unchanged. The twelve
+  Arabidopsis additions retrieved on 2026-09-09 have source files and deterministic
+  model exports, but **no accepted owner receipts yet**. Local conversion alone
+  does not qualify a downstream experiment.
+  The record ledger preserves IDs, taxa, assay labels, widths, mean supplied
+  column totals, rights, URLs, digests, and intake exposure state. For the additions,
+  matrix-generation PMID, validation PMIDs, and UniProt accession are separate
+  fields; `not_recorded` marks fields not retrospectively curated for older rows.
+  `mean_column_total` replaces the misleading `mean_sequence_count` label without
+  changing its values: supplied PFM weights, particularly PBM-derived weights,
+  are not necessarily counts of independently observed sites. `fresh` records
+  data-owner intake status, not clearance against a downstream study's history.
 - `hocomoco_14_core_meme` describes selected HOCOMOCO 14 CORE probability
   matrices. The first bounded set contains MAX (`MAX.H14CORE.0.PS.A`), MYCN
   (`MYCN.H14CORE.0.PS.A`), and SP1 (`SP1.H14CORE.0.P.B`). HOCOMOCO publishes

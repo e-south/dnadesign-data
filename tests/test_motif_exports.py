@@ -1018,7 +1018,7 @@ def test_jaspar_2026_count_panel_replays_source_models_and_freshness() -> None:
     with (source_root / "records.tsv").open(encoding="utf-8", newline="") as handle:
         rows = tuple(csv.DictReader(handle, delimiter="\t"))
 
-    assert len(rows) == 16
+    assert len(rows) == 28
     assert {row["development_exposure"] for row in rows} == {"fresh"}
     assert {row["redistribution_posture"] for row in rows} == {"CC-BY-4.0"}
     assert {row["source_species"] for row in rows} == {
