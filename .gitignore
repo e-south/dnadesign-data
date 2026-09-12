@@ -173,3 +173,6 @@ biocyc_password*.txt
 
 # Local credential handoff/state
 .secrets/
+
+# Local export staging and publication-audit caches (see docs/dev/README.md).
+/.var/

@@ -28,6 +28,11 @@ The test suite includes repository information-architecture checks:
 These checks are intentionally conservative. If a legitimate exception appears,
 document the exception in `ARCHITECTURE.md` before changing the test.
 
+Root `.var/` holds local export staging and publication-audit caches. It is
+ignored runtime material, not a publication shelf. Retained public models belong
+under `generated/motif_models/` with their source provenance and inventory;
+private or unclassified source payloads remain outside the checkout.
+
 ## CLI Smoke Paths
 
 ```bash
@@ -51,7 +56,7 @@ The GitHub Actions workflow mirrors the local checks:
 - documentation routing checks;
 - Ruff format and lint;
 - all pre-commit hooks;
-- full pytest suite on Python 3.8 and 3.12;
+- full pytest suite on Python 3.10, 3.12, and 3.14;
 - CLI smoke for public data adapters and the source catalog list/schema/check
   surface;
 - package build smoke on Python 3.12.
