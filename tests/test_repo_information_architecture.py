@@ -184,10 +184,14 @@ def test_ci_uses_uv_cache_precommit_and_docs_checks() -> None:
     assert "astral-sh/setup-uv" in workflow
     assert "enable-cache: true" in workflow
     assert "uv lock --check" in workflow
-    assert "uv run pre-commit run --all-files" in workflow
+    assert "uv sync --locked --dev --python 3.12" in workflow
+    assert '"$RUNNER_TEMP/check-tools/bin/pre-commit" run --all-files' in workflow
     assert "uv run python -m dnadesign_data.devtools.docs_check" in workflow
     assert "uv run python -m dnadesign_data.devtools.publication_check" in workflow
-    assert "uv run pip-audit --local" in workflow
+    assert 'sysconfig.get_path("purelib")' in workflow
+    assert (
+        '"$RUNNER_TEMP/check-tools/bin/pip-audit" --path "$site_packages"' in workflow
+    )
     assert "uv run dnadesign-data-sources list --kind all --indent 0" in workflow
     assert "uv run dnadesign-data-sources schema --indent 0" in workflow
     assert (

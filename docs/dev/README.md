@@ -2,7 +2,14 @@
 
 ## Primary Checks
 
+Use Python 3.12 for the full developer environment. The package and its tests
+also support Python 3.10. The patched filelock used by pip-audit and pre-commit
+requires Python 3.11 or newer. CI installs those tools from the same lockfile
+under Python 3.12 and uses pip-audit to check each matrix environment's
+installed packages.
+
 ```bash
+uv sync --locked --dev --python 3.12
 uv run pytest -q
 uv run ruff check .
 uv run ruff format --check .

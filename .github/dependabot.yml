@@ -8,6 +8,9 @@ updates:
       default-days: 7
     open-pull-requests-limit: 5
     groups:
+      python-security:
+        applies-to: security-updates
+        patterns: ["*"]
       python-dependencies:
         patterns: ["*"]
     commit-message:
