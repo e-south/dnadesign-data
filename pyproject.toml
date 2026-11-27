@@ -25,8 +25,8 @@ dnadesign-data-sources = "dnadesign_data.catalog.cli:main"
 
 [dependency-groups]
 dev = [
-    "pip-audit>=2.9.0",
-    "pre-commit>=4.3.0",
+    "pip-audit>=2.9.0; python_version >= '3.11'",
+    "pre-commit>=4.3.0; python_version >= '3.11'",
     "pytest>=9.0.3,<10",
     "ruff>=0.14.14",
 ]
